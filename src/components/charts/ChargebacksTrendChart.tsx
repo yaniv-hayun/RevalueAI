@@ -46,17 +46,14 @@ const ChargebacksTrendChart: React.FC = () => {
           label: 'Amount ($)',
           color: '#e41e5b',
           curve: 'linear',
-          yAxisKey: '1',
         },
         {
           data: amountsProjection,
           label: 'Amount (Projection)',
           color: '#f06292',
           curve: 'linear',
-          yAxisKey: '1',
         },
       ]}
-      rightAxis="1"
       width={undefined}
       height={300}
       margin={{ left: 60, right: 60, top: 20, bottom: 60 }}

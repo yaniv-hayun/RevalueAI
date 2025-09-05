@@ -20,12 +20,12 @@ const Dashboard: React.FC = () => {
           minHeight: '100vh',
           bgcolor: 'background.default'
         }}>
-        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: 4 }}>
+        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: 3}}>
 
           {/* Charts Grid */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {/* Top Row */}
-            <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
               <Box sx={{ flex: '1 1 45%', minWidth: 400 }}>
                 <Card 
                   elevation={0} 

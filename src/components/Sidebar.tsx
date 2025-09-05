@@ -360,7 +360,6 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         component="main" 
         sx={{ 
           flexGrow: 1, 
-          p: 3,
           bgcolor: 'background.default',
           minHeight: '100vh',
           color: 'text.primary'
