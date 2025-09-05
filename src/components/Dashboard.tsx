@@ -16,50 +16,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <Sidebar>
-      <Box sx={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'radial-gradient(circle at 20% 50%, rgba(0, 115, 229, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(228, 30, 91, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(77, 158, 255, 0.1) 0%, transparent 50%)',
-          pointerEvents: 'none',
-        }
-      }}>
+              <Box sx={{
+          minHeight: '100vh',
+          bgcolor: 'background.default'
+        }}>
         <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: 4 }}>
-          {/* Dashboard Header */}
-          <Box sx={{ mb: 4, textAlign: 'center' }}>
-            <Typography 
-              variant="h3" 
-              component="h1" 
-              sx={{ 
-                fontWeight: 700,
-                background: 'linear-gradient(45deg, #0073E5, #e41e5b)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                mb: 2,
-                textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-              }}
-            >
-              Fraud Analytics Dashboard
-            </Typography>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                color: 'text.secondary',
-                fontWeight: 400,
-                opacity: 0.8
-              }}
-            >
-              Real-time insights and comprehensive fraud analysis
-            </Typography>
-          </Box>
 
           {/* Charts Grid */}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
