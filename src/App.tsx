@@ -5,6 +5,7 @@ import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import Analytics from './components/Analytics';
+import Actions from './components/Actions';
 import Layout from './components/Layout';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -59,6 +60,16 @@ const App: React.FC = () => {
               <ProtectedRoute>
                 <Layout>
                   <Analytics />
+                </Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/actions" 
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Actions />
                 </Layout>
               </ProtectedRoute>
             } 

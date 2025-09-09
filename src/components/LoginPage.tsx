@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
       id: '1',
       name: 'John Doe',
       email: 'john.doe@example.com',
-      picture: 'https://via.placeholder.com/150',
+      picture: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
     };
 
     try {

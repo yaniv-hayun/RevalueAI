@@ -29,9 +29,9 @@ const FraudVsNonFraudChart: React.FC = () => {
           color: '#0073E5',
         },
       ]}
-      width={undefined}
+      // width={undefined}
       height={300}
-      margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+      // margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
     />
   );
 };

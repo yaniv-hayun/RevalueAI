@@ -9,7 +9,7 @@ const ChargebacksTrendChart: React.FC = () => {
   const amountsProjection = [32000, 28000, 38000, 48000];
 
   return (
-    <LineChart
+    <LineChart 
       xAxis={[
         {
           data: months,
@@ -55,9 +55,9 @@ const ChargebacksTrendChart: React.FC = () => {
           curve: 'linear',
         },
       ]}
-      width={undefined}
+      // width={undefined}
       height={300}
-      margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
+      // margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
       grid={{ vertical: true, horizontal: true }}
     />
   );

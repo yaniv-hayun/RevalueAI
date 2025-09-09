@@ -16,6 +16,7 @@ import {
 } from '@mui/icons-material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import RevalueAILogo from './RevalueAILogo';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -23,150 +24,188 @@ const LandingPage: React.FC = () => {
   const features = [
     {
       icon: <Security sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: 'Advanced Fraud Detection',
-      description: 'AI-powered algorithms to identify and prevent fraudulent transactions in real-time.',
+      title: '1. Connect Your Data',
+      description: 'Simple API integration takes less than 5 minutes. Connect your payment processor and start protecting transactions immediately.',
     },
     {
       icon: <Analytics sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: 'Comprehensive Analytics',
-      description: 'Detailed insights into chargeback patterns, fraud types, and issuer breakdowns.',
+      title: '2. AI Analyzes Everything',
+      description: 'Our machine learning models analyze every transaction in real-time, identifying fraud patterns before they impact your business.',
     },
     {
       icon: <TrendingDown sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: 'Trend Analysis',
-      description: 'Track chargeback trends with predictive analytics and future projections.',
+      title: '3. Stop Fraud Instantly',
+      description: 'Get instant alerts and automatic blocking of suspicious transactions. Reduce fraud by up to 95% within the first month.',
     },
     {
       icon: <Shield sx={{ fontSize: 40, color: 'primary.main' }} />,
-      title: 'Risk Management',
-      description: 'Proactive risk assessment and mitigation strategies for your business.',
+      title: '4. Grow With Confidence',
+      description: 'Focus on growing your business while we handle the security. Our AI gets smarter with every transaction.',
     },
   ];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* Hero Section with Gradient Background */}
+      {/* Hero Section */}
       <Box sx={{
-        background: 'linear-gradient(135deg, #0073E5 0%, #4d9eff 100%)',
+        background: 'linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%)',
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'radial-gradient(circle at 20% 50%, rgba(0, 115, 229, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(77, 158, 255, 0.2) 0%, transparent 50%)',
-          pointerEvents: 'none',
-        }
       }}>
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-          <Box sx={{ textAlign: 'center', py: 8 }}>
-            {/* Main Heading */}
-            <Typography 
-              variant="h2" 
-              component="h1" 
-              gutterBottom
-              sx={{ 
-                fontWeight: 800,
-                fontSize: { xs: '2.5rem', md: '4rem' },
-                lineHeight: 1.1,
-                color: 'white',
-                mb: 3,
-                textShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              Advanced Fraud
-              <br />
-              <Box component="span" sx={{
-                background: 'linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3)',
-                backgroundSize: '400% 400%',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                animation: 'gradientShift 3s ease-in-out infinite',
-                '@keyframes gradientShift': {
-                  '0%': { backgroundPosition: '0% 50%' },
-                  '50%': { backgroundPosition: '100% 50%' },
-                  '100%': { backgroundPosition: '0% 50%' },
-                }
-              }}>
-                Advisory Platform
-              </Box>
-            </Typography>
-            
-            {/* Subtitle */}
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                mb: 4, 
-                maxWidth: 700, 
-                mx: 'auto',
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontWeight: 300,
-                lineHeight: 1.6,
-                textShadow: '0 2px 10px rgba(0,0,0,0.2)',
-              }}
-            >
-              Protect your business with AI-powered fraud detection, comprehensive analytics, 
-              and actionable insights to reduce chargebacks and maximize your revenue.
-            </Typography>
-            
-            {/* CTA Buttons */}
-            <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap', mt: 6 }}>
-              <Button 
-                variant="contained" 
-                size="large"
-                onClick={() => navigate('/login')}
+          {/* Logo Header */}
+          <Box sx={{ 
+            position: 'absolute', 
+            top: 20, 
+            left: 20, 
+            zIndex: 2 
+          }}>
+            <RevalueAILogo size="medium" showTagline={false} />
+          </Box>
+          
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            minHeight: '80vh',
+            gap: 6,
+            flexWrap: 'wrap'
+          }}>
+            {/* Left Content */}
+            <Box sx={{ flex: '1 1 50%', minWidth: 300 }}>
+              <Typography 
+                variant="h3" 
+                component="h3" 
+                gutterBottom
                 sx={{ 
-                  px: 6, 
-                  py: 2,
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  borderRadius: 3,
-                  background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
-                  boxShadow: '0 8px 32px rgba(255, 107, 107, 0.3)',
-                  textTransform: 'none',
-                  '&:hover': {
-                    background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
-                    boxShadow: '0 12px 40px rgba(255, 107, 107, 0.4)',
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.3s ease',
-                  },
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                Get Started Free
-              </Button>
-              <Button 
-                variant="outlined" 
-                size="large"
-                sx={{ 
-                  px: 6, 
-                  py: 2,
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  borderRadius: 3,
-                  borderColor: 'rgba(255, 255, 255, 0.5)',
+                  fontWeight: 800,
+                  lineHeight: 1.1,
                   color: 'white',
-                  textTransform: 'none',
-                  backdropFilter: 'blur(10px)',
-                  '&:hover': {
-                    borderColor: 'white',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.3s ease',
-                  },
-                  transition: 'all 0.3s ease',
+                  mb: 3,
+                  textShadow: '0 4px 20px rgba(0,0,0,0.3)',
                 }}
               >
-                Watch Demo
-              </Button>
+                
+AI Agent              </Typography>
+              
+              <Typography 
+                variant="h3" 
+                sx={{ 
+                  mb: 4, 
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontWeight: 300,
+                  lineHeight: 1.6,
+                  maxWidth: 500,
+                }}
+              >
+                Fraud Detection Consultanct
+                </Typography>
+              
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4 }}>
+                <Button 
+                  variant="contained" 
+                  size="large"
+                  onClick={() => navigate('/login')}
+                  sx={{ 
+                    px: 4, 
+                    py: 2,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
+                    textTransform: 'none',
+                    '&:hover': {
+                      background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
+                      transform: 'translateY(-2px)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Free 15-days trial
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  size="large"
+                  sx={{ 
+                    px: 4, 
+                    py: 2,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    borderColor: 'rgba(255, 255, 255, 0.5)',
+                    color: 'white',
+                    textTransform: 'none',
+                    '&:hover': {
+                      borderColor: 'white',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Watch a demo
+                </Button>
+              </Box>
+
+         
+            </Box>
+
+            {/* Right Content - Dashboard Preview */}
+            <Box sx={{ flex: '1 1 40%', minWidth: 300 }}>
+              <Box sx={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: 3,
+                p: 3,
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                animation: 'float 6s ease-in-out infinite',
+                '@keyframes float': {
+                  '0%, 100%': { transform: 'translateY(0px)' },
+                  '50%': { transform: 'translateY(-20px)' },
+                },
+              }}>
+                <Typography variant="h6" sx={{ color: 'white', mb: 2, textAlign: 'center' }}>
+                  Fraud Analytics Dashboard
+                </Typography>
+                <Box sx={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: '1fr 1fr', 
+                  gap: 2,
+                  mb: 2 
+                }}>
+                  <Box sx={{ 
+                    background: 'rgba(255, 255, 255, 0.2)', 
+                    p: 2, 
+                    borderRadius: 2,
+                    textAlign: 'center'
+                  }}>
+                    <Typography variant="h4" sx={{ color: 'white', fontWeight: 700 }}>$2.8M</Typography>
+                    <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>Total Volume</Typography>
+                  </Box>
+                  <Box sx={{ 
+                    background: 'rgba(255, 255, 255, 0.2)', 
+                    p: 2, 
+                    borderRadius: 2,
+                    textAlign: 'center'
+                  }}>
+                    <Typography variant="h4" sx={{ color: 'white', fontWeight: 700 }}>89</Typography>
+                    <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>Chargebacks</Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ 
+                  height: 120, 
+                  background: 'rgba(255, 255, 255, 0.1)', 
+                  borderRadius: 2,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                    Real-time Fraud Detection
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </Container>
@@ -174,122 +213,61 @@ const LandingPage: React.FC = () => {
       
       <Container maxWidth="lg" sx={{ py: 8 }}>
 
-        {/* Features Section */}
-        <Box sx={{ 
-          background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-          borderRadius: 4,
-          p: 6,
-          mb: 8,
-          animation: 'fadeInUp 0.8s ease-out',
-          '@keyframes fadeInUp': {
-            '0%': {
-              opacity: 0,
-              transform: 'translateY(30px)',
-            },
-            '100%': {
-              opacity: 1,
-              transform: 'translateY(0)',
-            },
-          },
-        }}>
+        {/* What you can do section */}
+        <Box sx={{ mb: 8, textAlign: 'center' }}>
           <Typography 
             variant="h3" 
             component="h2" 
-            textAlign="center" 
             sx={{ 
-              mb: 8, 
+              mb: 6, 
               fontWeight: 700,
-              background: 'linear-gradient(45deg, #0073E5, #4d9eff)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              animation: 'slideInFromTop 1s ease-out 0.2s both',
-              '@keyframes slideInFromTop': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateY(-50px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateY(0)',
-                },
-              },
+              color: '#2c3e50',
             }}
           >
-            Powerful Features
+            What you can do with RevalueAI's Fraud Detection
           </Typography>
           
-          <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {features.map((feature, index) => (
-              <Box key={index} sx={{ flex: '1 1 45%', minWidth: 300 }}>
+          <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {[
+              {
+                title: 'Detect',
+                description: 'Work as a team to identify and prevent fraudulent transactions before they impact your business.'
+              },
+              {
+                title: 'Automation',
+                description: 'Automate fraud detection & simplify your security workflow and save time.'
+              },
+              {
+                title: 'Communication',
+                description: 'Integrate RevalueAI with your existing systems to solve fraud issues and monitor in real-time.'
+              }
+            ].map((feature, index) => (
+              <Box key={index} sx={{ flex: '1 1 30%', minWidth: 300 }}>
                 <Card 
                   elevation={0} 
                   sx={{ 
                     height: '100%',
-                    background: 'rgba(255, 255, 255, 0.8)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: 3,
+                    background: 'white',
+                    border: '1px solid #e0e0e0',
+                    borderRadius: 2,
                     transition: 'all 0.3s ease',
-                    animation: `slideInFromLeft 0.8s ease-out ${0.4 + index * 0.2}s both`,
-                    '@keyframes slideInFromLeft': {
-                      '0%': {
-                        opacity: 0,
-                        transform: 'translateX(-50px)',
-                      },
-                      '100%': {
-                        opacity: 1,
-                        transform: 'translateX(0)',
-                      },
-                    },
                     '&:hover': {
-                      transform: 'translateY(-8px) scale(1.02)',
-                      boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-                      background: 'rgba(255, 255, 255, 0.95)',
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transform: 'translateY(-5px)',
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
                     },
                   }}
                 >
-                  <CardContent sx={{ p: 4 }}>
-                    <Box sx={{ 
-                      mb: 3,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: 80,
-                      height: 80,
-                      borderRadius: '50%',
-                      background: 'rgba(255, 255, 255, 0.9)',
-                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                      border: '2px solid rgba(0, 0, 0, 0.1)',
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        transform: 'rotate(360deg) scale(1.1)',
-                        boxShadow: '0 12px 40px rgba(0, 115, 229, 0.3)',
-                        background: 'linear-gradient(135deg, rgba(0, 115, 229, 0.1), rgba(77, 158, 255, 0.1))',
-                      },
-                    }}>
-                      <Box sx={{ 
-                        color: '#000000', 
-                        fontSize: 32,
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          color: '#0073E5',
-                        },
-                      }}>
-                        {feature.icon}
-                      </Box>
-                    </Box>
+                  <CardContent sx={{ p: 4, textAlign: 'center' }}>
                     <Typography variant="h5" component="h3" gutterBottom sx={{ 
-                      fontWeight: 700,
-                      color: '#2c3e50',
+                      fontWeight: 600,
+                      color: '#1e3a8a',
                       mb: 2,
                     }}>
                       {feature.title}
                     </Typography>
                     <Typography variant="body1" sx={{ 
                       color: '#5a6c7d',
-                      lineHeight: 1.7,
+                      lineHeight: 1.6,
                     }}>
                       {feature.description}
                     </Typography>
@@ -300,329 +278,471 @@ const LandingPage: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Risk Analysis Section */}
-        <Box sx={{ 
-          background: 'linear-gradient(135deg, #0073E5 0%, #4d9eff 100%)',
-          borderRadius: 4,
-          p: 6,
-          mb: 8,
-          color: 'white',
-          animation: 'fadeInUp 1s ease-out 0.5s both',
-          '@keyframes fadeInUp': {
-            '0%': {
-              opacity: 0,
-              transform: 'translateY(50px)',
-            },
-            '100%': {
-              opacity: 1,
-              transform: 'translateY(0)',
-            },
-          },
-        }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            textAlign="center" 
-            sx={{ 
-              mb: 6, 
-              fontWeight: 700,
-              color: 'white',
-              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-              animation: 'slideInFromTop 1s ease-out 0.7s both',
-              '@keyframes slideInFromTop': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateY(-30px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateY(0)',
-                },
-              },
-            }}
-          >
-            Risk Analysis - Fraud Summary
-          </Typography>
-          
-          <Box sx={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {/* Fraud Breakdown by Category */}
-            <Box sx={{ 
-              flex: '1 1 400px', 
-              minWidth: 400,
-              animation: 'slideInFromLeft 1s ease-out 0.9s both',
-              '@keyframes slideInFromLeft': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateX(-50px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateX(0)',
-                },
-              },
-            }}>
-              <Typography 
-                variant="h5" 
-                component="h3" 
-                sx={{ 
-                  mb: 3, 
-                  fontWeight: 600,
-                  color: 'white',
-                  textAlign: 'center',
-                }}
-              >
-                Fraud Breakdown by Category
-              </Typography>
-              <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'center',
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: 3,
-                p: 3,
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'scale(1.05)',
-                  background: 'rgba(255, 255, 255, 0.15)',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-                },
-              }}>
-                <PieChart
-                  series={[
-                    {
-                      data: [
-                        { id: 0, value: 20, label: 'Account Take Over', color: '#1e3a8a' },
-                        { id: 1, value: 25, label: 'Shipping Mismatch', color: '#3b82f6' },
-                        { id: 2, value: 25, label: 'Exposed Fraud', color: '#60a5fa' },
-                        { id: 3, value: 20, label: 'Topmail Fraud Ring', color: '#10b981' },
-                        { id: 4, value: 10, label: 'Other', color: '#f59e0b' },
-                      ],
-                      highlightScope: { highlight: 'item' },
-                    },
-                  ]}
-                  width={400}
-                  height={300}
-                />
-              </Box>
-            </Box>
+        {/* Testimonial Section */}
+        <Box sx={{ mb: 8, textAlign: 'center' }}>
+          <Box sx={{ 
+            background: '#f8f9fa',
+            borderRadius: 3,
+            p: 6,
+            maxWidth: 800,
+            mx: 'auto',
+            mb: 6,
+          }}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                mb: 4, 
+                fontWeight: 600,
+                color: '#2c3e50',
+                fontStyle: 'italic',
+                lineHeight: 1.6,
+              }}
+            >
+              "With RevalueAI's help, we've seen a <strong>95% decrease</strong> in fraud losses, a <strong>30 minute</strong> faster detection time and our security score is <strong>up to 98%</strong>."
+            </Typography>
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                fontWeight: 600,
+                color: '#1e3a8a',
+              }}
+            >
+              Sarah Johnson
+            </Typography>
+            <Typography 
+              variant="body2" 
+              sx={{ 
+                color: '#5a6c7d',
+              }}
+            >
+              CEO Founder at TechCorp
+            </Typography>
+          </Box>
+        </Box>
 
-            {/* Gaps Mapping */}
-            <Box sx={{ 
-              flex: '1 1 400px', 
-              minWidth: 400,
-              animation: 'slideInFromRight 1s ease-out 1.1s both',
-              '@keyframes slideInFromRight': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateX(50px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateX(0)',
-                },
-              },
-            }}>
-              <Typography 
-                variant="h5" 
-                component="h3" 
+        {/* Knowledge Base & Live Chat Section */}
+        <Box sx={{ mb: 8 }}>
+          <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Box sx={{ flex: '1 1 45%', minWidth: 300 }}>
+              <Card 
+                elevation={0} 
                 sx={{ 
-                  mb: 3, 
-                  fontWeight: 600,
-                  color: 'white',
-                  textAlign: 'center',
-                }}
-              >
-                Gaps Mapping
-              </Typography>
-              <TableContainer 
-                component={Paper} 
-                sx={{ 
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: 3,
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  height: '100%',
+                  background: 'white',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'scale(1.02)',
-                    background: 'rgba(255, 255, 255, 0.15)',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
                   },
                 }}
               >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell sx={{ color: 'white', fontWeight: 600, borderBottom: '1px solid rgba(255, 255, 255, 0.2)' }}>
-                        Gap Type
-                      </TableCell>
-                      <TableCell sx={{ color: 'white', fontWeight: 600, borderBottom: '1px solid rgba(255, 255, 255, 0.2)' }}>
-                        Number of Chargebacks
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        Lack of phone number
-                      </TableCell>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        49
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        Unverified Email Address
-                      </TableCell>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        25
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        Billing-Shipping Mismatch
-                      </TableCell>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        24
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        Lack of IP
-                      </TableCell>
-                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                        9
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                  <Typography variant="h5" component="h3" gutterBottom sx={{ 
+                    fontWeight: 600,
+                    color: '#1e3a8a',
+                    mb: 2,
+                  }}>
+                    Knowledge Base
+                  </Typography>
+                  <Typography variant="body1" sx={{ 
+                    color: '#5a6c7d',
+                    lineHeight: 1.6,
+                    mb: 3,
+                  }}>
+                    Help your team get all the answers about fraud prevention and security best practices.
+                  </Typography>
+                  <Button 
+                    variant="outlined"
+                    sx={{ 
+                      borderColor: '#1e3a8a',
+                      color: '#1e3a8a',
+                      textTransform: 'none',
+                      '&:hover': {
+                        borderColor: '#1e40af',
+                        backgroundColor: 'rgba(30, 58, 138, 0.04)',
+                      },
+                    }}
+                  >
+                    Go to help page
+                  </Button>
+                </CardContent>
+              </Card>
+            </Box>
+            
+            <Box sx={{ flex: '1 1 45%', minWidth: 300 }}>
+              <Card 
+                elevation={0} 
+                sx={{ 
+                  height: '100%',
+                  background: 'white',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                  <Typography variant="h5" component="h3" gutterBottom sx={{ 
+                    fontWeight: 600,
+                    color: '#1e3a8a',
+                    mb: 2,
+                  }}>
+                    Live Support
+                  </Typography>
+                  <Typography variant="body1" sx={{ 
+                    color: '#5a6c7d',
+                    lineHeight: 1.6,
+                    mb: 3,
+                  }}>
+                    Professionally cultivate one-to-one customer service with robust fraud detection support.
+                  </Typography>
+                  <Button 
+                    variant="outlined"
+                    sx={{ 
+                      borderColor: '#1e3a8a',
+                      color: '#1e3a8a',
+                      textTransform: 'none',
+                      '&:hover': {
+                        borderColor: '#1e40af',
+                        backgroundColor: 'rgba(30, 58, 138, 0.04)',
+                      },
+                    }}
+                  >
+                    Go to live chat
+                  </Button>
+                </CardContent>
+              </Card>
             </Box>
           </Box>
         </Box>
 
-        {/* CTA Section */}
+        {/* No Solution Found Section */}
+        <Box sx={{ mb: 8, textAlign: 'center' }}>
+          <Typography 
+            variant="h3" 
+            component="h2" 
+            sx={{ 
+              mb: 2, 
+              fontWeight: 700,
+              color: '#2c3e50',
+            }}
+          >
+            No solution found?
+          </Typography>
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              mb: 6, 
+              color: '#5a6c7d',
+              fontWeight: 300,
+              maxWidth: 600,
+              mx: 'auto',
+            }}
+          >
+            RevalueAI is the partner of choice for many of the world's leading enterprises, SMEs, and technology challenges. We help businesses elevate their security through custom fraud detection solutions.
+          </Typography>
+          
+          <Box sx={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Button 
+              variant="contained" 
+              size="large"
+              sx={{ 
+                px: 6, 
+                py: 2,
+                fontSize: '1rem',
+                fontWeight: 600,
+                borderRadius: 2,
+                background: '#1e3a8a',
+                textTransform: 'none',
+                '&:hover': {
+                  background: '#1e40af',
+                },
+              }}
+            >
+              Submit a ticket
+            </Button>
+            <Box sx={{ textAlign: 'center' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, color: '#2c3e50', mb: 1 }}>
+                Call Direct 24/7
+              </Typography>
+              <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e3a8a' }}>
+                +1-800-456-478-23
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Pricing Section */}
+        <Box sx={{ mb: 8, textAlign: 'center' }}>
+          <Typography 
+            variant="h3" 
+            component="h2" 
+            sx={{ 
+              mb: 2, 
+              fontWeight: 700,
+              color: '#2c3e50',
+            }}
+          >
+            Kick-start with an affordable
+          </Typography>
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              mb: 6, 
+              color: '#5a6c7d',
+              fontWeight: 300,
+              maxWidth: 600,
+              mx: 'auto',
+            }}
+          >
+            You can choose to pay monthly or annually. Don't worry! You can cancel anytime
+          </Typography>
+          
+          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {[
+              {
+                name: 'Starter',
+                price: 'Free',
+                period: '',
+                features: ['1 User', '1 Dashboard', '5 Projects', 'Basic Support'],
+                popular: false
+              },
+              {
+                name: 'Professional',
+                price: '$59',
+                period: '/month',
+                features: ['3 Users', '3 Dashboards', '10 Projects', 'Advanced Analytics', 'Priority Support'],
+                popular: true
+              },
+              {
+                name: 'Business',
+                price: '$99',
+                period: '/month',
+                features: ['20 Users', 'Unlimited Dashboards', '50 Projects', 'Custom Integrations', '24/7 Support'],
+                popular: false
+              },
+              {
+                name: 'Enterprise',
+                price: '$129',
+                period: '/month',
+                features: ['Unlimited Users', 'Unlimited Dashboards', 'Unlimited Projects', 'Custom Development', 'Dedicated Support'],
+                popular: false
+              }
+            ].map((plan, index) => (
+              <Card 
+                key={index}
+                elevation={0} 
+                sx={{ 
+                  flex: '1 1 22%',
+                  minWidth: 250,
+                  maxWidth: 300,
+                  background: plan.popular ? '#1e3a8a' : 'white',
+                  border: plan.popular ? 'none' : '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  position: 'relative',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                {plan.popular && (
+                  <Box sx={{
+                    position: 'absolute',
+                    top: -10,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: '#ff6b6b',
+                    color: 'white',
+                    px: 2,
+                    py: 0.5,
+                    borderRadius: 1,
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                  }}>
+                    Most Popular
+                  </Box>
+                )}
+                <CardContent sx={{ p: 4, textAlign: 'center' }}>
+                  <Typography variant="h5" sx={{ 
+                    fontWeight: 600,
+                    color: plan.popular ? 'white' : '#2c3e50',
+                    mb: 1,
+                  }}>
+                    {plan.name}
+                  </Typography>
+                  <Box sx={{ mb: 3 }}>
+                    <Typography variant="h3" sx={{ 
+                      fontWeight: 800,
+                      color: plan.popular ? 'white' : '#1e3a8a',
+                      display: 'inline',
+                    }}>
+                      {plan.price}
+                    </Typography>
+                    <Typography variant="h6" sx={{ 
+                      color: plan.popular ? 'rgba(255,255,255,0.8)' : '#5a6c7d',
+                      display: 'inline',
+                    }}>
+                      {plan.period}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    color: plan.popular ? 'rgba(255,255,255,0.8)' : '#5a6c7d',
+                    mb: 3,
+                  }}>
+                    Free with 14 days trial, then you can choose a plan.
+                  </Typography>
+                  <Box sx={{ mb: 3 }}>
+                    {plan.features.map((feature, idx) => (
+                      <Typography key={idx} variant="body2" sx={{ 
+                        color: plan.popular ? 'rgba(255,255,255,0.9)' : '#5a6c7d',
+                        mb: 1,
+                      }}>
+                        • {feature}
+                      </Typography>
+                    ))}
+                  </Box>
+                  <Button 
+                    variant={plan.popular ? 'outlined' : 'contained'}
+                    fullWidth
+                    sx={{ 
+                      borderColor: plan.popular ? 'white' : '#1e3a8a',
+                      color: plan.popular ? 'white' : 'white',
+                      background: plan.popular ? 'transparent' : '#1e3a8a',
+                      textTransform: 'none',
+                      '&:hover': {
+                        background: plan.popular ? 'rgba(255,255,255,0.1)' : '#1e40af',
+                        borderColor: plan.popular ? 'white' : '#1e40af',
+                      },
+                    }}
+                  >
+                    Get Started Now
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+          
+          <Typography variant="body2" sx={{ 
+            mt: 4,
+            color: '#5a6c7d',
+          }}>
+            Do you have a large team? Contact us for information about more enterprise options
+          </Typography>
+        </Box>
+
+        {/* Stats Section */}
+        <Box sx={{ mb: 8, textAlign: 'center' }}>
+          <Box sx={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {[
+              { number: '10M+', label: 'Users protected & transactions analyzed' },
+              { number: '50K+', label: 'Fraud attempts blocked everyday' },
+              { number: '5K+', label: 'Happy clients satisfied on worldwide' }
+            ].map((stat, index) => (
+              <Box key={index} sx={{ textAlign: 'center' }}>
+                <Typography variant="h2" sx={{ 
+                  fontWeight: 800,
+                  color: '#1e3a8a',
+                  mb: 1,
+                }}>
+                  {stat.number}
+                </Typography>
+                <Typography variant="h6" sx={{ 
+                  color: '#5a6c7d',
+                  fontWeight: 500,
+                }}>
+                  {stat.label}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Final CTA Section */}
         <Box sx={{ 
           textAlign: 'center', 
           mt: 8, 
           p: 8,
-          background: 'linear-gradient(135deg, #0073E5 0%, #4d9eff 100%)',
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%)',
           borderRadius: 4,
-          position: 'relative',
-          overflow: 'hidden',
-          animation: 'fadeInUp 1s ease-out 1.3s both',
-          '@keyframes fadeInUp': {
-            '0%': {
-              opacity: 0,
-              transform: 'translateY(50px)',
-            },
-            '100%': {
-              opacity: 1,
-              transform: 'translateY(0)',
-            },
-          },
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-            pointerEvents: 'none',
-            animation: 'pulse 4s ease-in-out infinite',
-            '@keyframes pulse': {
-              '0%, 100%': {
-                opacity: 0.5,
-                transform: 'scale(1)',
-              },
-              '50%': {
-                opacity: 0.8,
-                transform: 'scale(1.1)',
-              },
-            },
-          }
+          color: 'white',
         }}>
-          <Box sx={{ position: 'relative', zIndex: 1 }}>
-            <Typography variant="h3" component="h2" gutterBottom sx={{ 
-              fontWeight: 700,
-              color: 'white',
-              mb: 3,
-              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-              animation: 'slideInFromTop 1s ease-out 1.5s both',
-              '@keyframes slideInFromTop': {
-                '0%': {
-                  opacity: 0,
-                  transform: 'translateY(-30px)',
-                },
-                '100%': {
-                  opacity: 1,
-                  transform: 'translateY(0)',
-                },
-              },
-            }}>
-              Ready to Protect Your Business?
-            </Typography>
-            <Typography variant="h6" sx={{ 
-              mb: 4,
-              color: 'rgba(255, 255, 255, 0.9)',
-              fontWeight: 300,
-              maxWidth: 600,
-              mx: 'auto',
-              animation: 'fadeIn 1s ease-out 1.7s both',
-              '@keyframes fadeIn': {
-                '0%': {
-                  opacity: 0,
-                },
-                '100%': {
-                  opacity: 1,
-                },
-              },
-            }}>
-              Join thousands of businesses already using our fraud advisory platform to reduce chargebacks and maximize revenue
-            </Typography>
+          <Typography variant="h3" component="h2" gutterBottom sx={{ 
+            fontWeight: 700,
+            color: 'white',
+            mb: 3,
+            textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+          }}>
+            Try RevalueAI Today
+          </Typography>
+          <Typography variant="h6" sx={{ 
+            mb: 4,
+            color: 'rgba(255, 255, 255, 0.9)',
+            fontWeight: 300,
+            maxWidth: 600,
+            mx: 'auto',
+          }}>
+            Invite your team and explore RevalueAI features for free
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap', mb: 4 }}>
             <Button 
               variant="contained" 
               size="large"
               onClick={() => navigate('/login')}
               sx={{ 
-                px: 8, 
+                px: 6, 
                 py: 2.5,
                 fontSize: '1.2rem',
                 fontWeight: 600,
-                borderRadius: 3,
+                borderRadius: 2,
                 background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
-                boxShadow: '0 8px 32px rgba(255, 107, 107, 0.4)',
                 textTransform: 'none',
-                animation: 'bounceIn 1s ease-out 1.9s both',
-                '@keyframes bounceIn': {
-                  '0%': {
-                    opacity: 0,
-                    transform: 'scale(0.3)',
-                  },
-                  '50%': {
-                    opacity: 1,
-                    transform: 'scale(1.05)',
-                  },
-                  '70%': {
-                    transform: 'scale(0.9)',
-                  },
-                  '100%': {
-                    opacity: 1,
-                    transform: 'scale(1)',
-                  },
-                },
                 '&:hover': {
                   background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
-                  boxShadow: '0 12px 40px rgba(255, 107, 107, 0.5)',
-                  transform: 'translateY(-2px) scale(1.05)',
-                  transition: 'all 0.3s ease',
+                  transform: 'translateY(-2px)',
                 },
                 transition: 'all 0.3s ease',
               }}
             >
-              Start Free Trial
+              Sign up free
             </Button>
           </Box>
+          
+          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap', mb: 4 }}>
+            {[
+              'Free 15-Days Trial',
+              'Easy Setup',
+              'Share Dashboard'
+            ].map((feature, index) => (
+              <Box 
+                key={index}
+                sx={{ 
+                  px: 2, 
+                  py: 1, 
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  borderRadius: 2,
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: 'white',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                }}
+              >
+                {feature}
+              </Box>
+            ))}
+          </Box>
+          
+          <Typography variant="body2" sx={{ 
+            color: 'rgba(255, 255, 255, 0.7)',
+          }}>
+            Find us on social media
+          </Typography>
         </Box>
       </Container>
     </Box>

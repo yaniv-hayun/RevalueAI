@@ -29,7 +29,10 @@ import {
   DarkMode,
   Logout as LogoutIcon,
   AccountCircle,
+  PlayArrow as ActionsIcon,
 } from '@mui/icons-material';
+import Popover from '@mui/material/Popover';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useTheme as useCustomTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -129,6 +132,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
+  const [profileAnchorEl, setProfileAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [imageError, setImageError] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -147,9 +152,34 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     navigate('/login');
   };
 
+  const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
+    setProfileAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClose = () => {
+    setProfileAnchorEl(null);
+  };
+
+  const handleLogoutFromPopover = () => {
+    handleProfileClose();
+    handleUserLogout();
+  };
+
+  const profileOpen = Boolean(profileAnchorEl);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  // Reset image error when user changes
+  React.useEffect(() => {
+    setImageError(false);
+  }, [user?.picture]);
+
   const mainMenuItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Analytics', icon: <AnalyticsIcon />, path: '/analytics' },
+    { text: 'Actions', icon: <ActionsIcon />, path: '/actions' },
     { text: 'Fraud Detection', icon: <SecurityIcon />, path: '/fraud-detection' },
     { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
   ];
@@ -318,16 +348,38 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           borderColor: 'divider',
           bgcolor: 'background.paper'
         }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Avatar sx={{ width: 32, height: 32 }}>
-              {user?.picture ? (
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 2,
+              cursor: 'pointer',
+              borderRadius: 1,
+              p: 1,
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              },
+              transition: 'background-color 0.2s'
+            }}
+            onClick={handleProfileClick}
+          >
+            <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}>
+              {user?.picture && !imageError ? (
                 <img 
                   src={user.picture} 
                   alt={user.name} 
-                  style={{ width: '100%', height: '100%', borderRadius: '50%' }} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    borderRadius: '50%',
+                    objectFit: 'cover'
+                  }}
+                  onError={handleImageError}
                 />
               ) : (
-                <AccountCircle />
+                <Typography variant="caption" sx={{ color: 'white', fontWeight: 600 }}>
+                  {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'U'}
+                </Typography>
               )}
             </Avatar>
             {open && (
@@ -340,21 +392,89 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                 </Typography>
               </Box>
             )}
-            <IconButton
-              onClick={handleUserLogout}
-              size="small"
-              color="inherit"
-              aria-label="logout"
-              sx={{ 
-                ml: 'auto',
-                opacity: open ? 1 : 0,
-                transition: 'opacity 0.2s'
-              }}
-            >
-              <LogoutIcon />
-            </IconButton>
           </Box>
         </Box>
+
+        {/* Profile Popover */}
+        <Popover
+          open={profileOpen}
+          anchorEl={profileAnchorEl}
+          onClose={handleProfileClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          sx={{
+            '& .MuiPopover-paper': {
+              minWidth: 280,
+              borderRadius: 2,
+              boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+            }
+          }}
+        >
+          <Box sx={{ p: 2 }}>
+            {/* Profile Header */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2, pb: 2, borderBottom: 1, borderColor: 'divider' }}>
+              <Avatar sx={{ width: 48, height: 48, bgcolor: 'primary.main' }}>
+                {user?.picture && !imageError ? (
+                  <img 
+                    src={user.picture} 
+                    alt={user.name} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      borderRadius: '50%',
+                      objectFit: 'cover'
+                    }}
+                    onError={handleImageError}
+                  />
+                ) : (
+                  <Typography variant="h6" sx={{ color: 'white', fontWeight: 600 }}>
+                    {user?.name ? user.name.split(' ').map(n => n[0]).join('').toUpperCase() : 'U'}
+                  </Typography>
+                )}
+              </Avatar>
+              <Box>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  {user?.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {user?.email}
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Profile Actions */}
+            <List sx={{ p: 0 }}>
+              <ListItem disablePadding>
+                <ListItemButton 
+                  onClick={handleLogoutFromPopover}
+                  sx={{ 
+                    borderRadius: 1,
+                    '&:hover': {
+                      backgroundColor: 'error.light',
+                      color: 'error.contrastText',
+                    }
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: 40 }}>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText 
+                    primary="Logout" 
+                    primaryTypographyProps={{ 
+                      fontWeight: 500 
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Box>
+        </Popover>
       </Drawer>
       <Box 
         component="main" 

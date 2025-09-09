@@ -29,9 +29,9 @@ const FraudBreakdownChart: React.FC = () => {
           color: '#e41e5b',
         },
       ]}
-      width={undefined}
+      // width={undefined}
       height={300}
-      margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+      // margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
     />
   );
 };

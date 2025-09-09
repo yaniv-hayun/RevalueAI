@@ -271,7 +271,7 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                height: { xs: 400, sm: 450 },
+                // height: { xs: 400, sm: 450 },
               //   background: 'rgba(255, 255, 255, 0.95)',
               //   backdropFilter: 'blur(10px)',
               //   border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -290,19 +290,16 @@ const Dashboard: React.FC = () => {
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
                 <Typography 
-                  variant="h6" 
-                  component="h2" 
+                  variant="body1" 
                   gutterBottom 
                   sx={{ 
-                    fontWeight: 600,
                     color: 'text.primary',
                     mb: 2,
-                    fontSize: { xs: '1.1rem', sm: '1.25rem' }
                   }}
                 >
                   Fraud vs Non-Fraud Cases
                 </Typography>
-                <Box sx={{ height: 'calc(100% - 50px)' }}>
+                <Box >
                   <FraudVsNonFraudChart />
                 </Box>
               </CardContent>
@@ -316,7 +313,7 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                height: { xs: 400, sm: 450 },
+                // height: { xs: 400, sm: 450 },
               //   background: 'rgba(255, 255, 255, 0.95)',
               //   backdropFilter: 'blur(10px)',
               //   border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -335,14 +332,13 @@ const Dashboard: React.FC = () => {
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
                 <Typography 
-                  variant="h6" 
-                  component="h2" 
+                  variant="body1" 
+             
                   gutterBottom 
                   sx={{ 
-                    fontWeight: 600,
                     color: 'text.primary',
                     mb: 2,
-                    fontSize: { xs: '1.1rem', sm: '1.25rem' }
+              
                   }}
                 >
                   Breakdown of Fraud Cases
@@ -368,7 +364,7 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                height: { xs: 400, sm: 450 },
+                // height: { xs: 400, sm: 450 },
               //   // background: 'rgba(255, 255, 255, 0.95)',
               //   backdropFilter: 'blur(10px)',
               //   border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -387,14 +383,14 @@ const Dashboard: React.FC = () => {
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
                 <Typography 
-                  variant="h6" 
+                  variant="body1" 
                   component="h2" 
                   gutterBottom 
                   sx={{ 
-                    fontWeight: 600,
+                   
                     color: 'text.primary',
-                    mb: 2,
-                    fontSize: { xs: '1.1rem', sm: '1.25rem' }
+                        mb: 2,
+                  
                   }}
                 >
                   Chargebacks and Amounts (with Projections)
@@ -413,7 +409,7 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                height: { xs: 400, sm: 450 },
+                // height: { xs: 400, sm: 450 },
                 // background: 'rgba(255, 255, 255, 0.95)',
               //   backdropFilter: 'blur(10px)',
               //   border: '1px solid rgba(255, 255, 255, 0.3)',
@@ -432,19 +428,19 @@ const Dashboard: React.FC = () => {
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
                 <Typography 
-                  variant="h6" 
+                  variant="body1" 
                   component="h2" 
                   gutterBottom 
                   sx={{ 
-                    fontWeight: 600,
+                   
                     color: 'text.primary',
                     mb: 2,
-                    fontSize: { xs: '1.1rem', sm: '1.25rem' }
+                
                   }}
                 >
                   Chargebacks Breakdown by Issuer
                 </Typography>
-                <Box sx={{ height: 'calc(100% - 50px)' }}>
+                <Box >
                   <ChargebacksByIssuerChart />
                 </Box>
               </CardContent>

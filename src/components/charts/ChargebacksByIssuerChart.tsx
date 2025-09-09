@@ -7,9 +7,9 @@ const ChargebacksByIssuerChart: React.FC = () => {
 
   return (
     <BarChart
-      width={undefined}
+      //width={undefined}
       height={300}
-      margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
+      // margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
       xAxis={[
         {
           data: issuers,
