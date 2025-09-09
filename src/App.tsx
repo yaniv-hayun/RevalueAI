@@ -5,6 +5,7 @@ import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import Analytics from './components/Analytics';
+import Layout from './components/Layout';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -46,7 +47,9 @@ const App: React.FC = () => {
             path="/dashboard" 
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Layout>
+                  <Dashboard />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -54,7 +57,9 @@ const App: React.FC = () => {
             path="/analytics" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -62,7 +67,9 @@ const App: React.FC = () => {
             path="/fraud-detection" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -70,7 +77,9 @@ const App: React.FC = () => {
             path="/reports" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -78,7 +87,9 @@ const App: React.FC = () => {
             path="/trends" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -86,7 +97,9 @@ const App: React.FC = () => {
             path="/transactions" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -94,7 +107,9 @@ const App: React.FC = () => {
             path="/settings" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -102,7 +117,9 @@ const App: React.FC = () => {
             path="/help" 
             element={
               <ProtectedRoute>
-                <Analytics />
+                <Layout>
+                  <Analytics />
+                </Layout>
               </ProtectedRoute>
             } 
           />

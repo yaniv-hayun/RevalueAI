@@ -14,6 +14,8 @@ import {
   TrendingDown,
   Shield,
 } from '@mui/icons-material';
+import { PieChart } from '@mui/x-charts/PieChart';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -178,6 +180,17 @@ const LandingPage: React.FC = () => {
           borderRadius: 4,
           p: 6,
           mb: 8,
+          animation: 'fadeInUp 0.8s ease-out',
+          '@keyframes fadeInUp': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateY(30px)',
+            },
+            '100%': {
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+          },
         }}>
           <Typography 
             variant="h3" 
@@ -190,6 +203,17 @@ const LandingPage: React.FC = () => {
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              animation: 'slideInFromTop 1s ease-out 0.2s both',
+              '@keyframes slideInFromTop': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateY(-50px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateY(0)',
+                },
+              },
             }}
           >
             Powerful Features
@@ -207,10 +231,22 @@ const LandingPage: React.FC = () => {
                     border: '1px solid rgba(255, 255, 255, 0.2)',
                     borderRadius: 3,
                     transition: 'all 0.3s ease',
+                    animation: `slideInFromLeft 0.8s ease-out ${0.4 + index * 0.2}s both`,
+                    '@keyframes slideInFromLeft': {
+                      '0%': {
+                        opacity: 0,
+                        transform: 'translateX(-50px)',
+                      },
+                      '100%': {
+                        opacity: 1,
+                        transform: 'translateX(0)',
+                      },
+                    },
                     '&:hover': {
-                      transform: 'translateY(-8px)',
-                      boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+                      transform: 'translateY(-8px) scale(1.02)',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
                       background: 'rgba(255, 255, 255, 0.95)',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                     },
                   }}
                 >
@@ -226,8 +262,21 @@ const LandingPage: React.FC = () => {
                       background: 'rgba(255, 255, 255, 0.9)',
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
                       border: '2px solid rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'rotate(360deg) scale(1.1)',
+                        boxShadow: '0 12px 40px rgba(0, 115, 229, 0.3)',
+                        background: 'linear-gradient(135deg, rgba(0, 115, 229, 0.1), rgba(77, 158, 255, 0.1))',
+                      },
                     }}>
-                      <Box sx={{ color: '#000000', fontSize: 32 }}>
+                      <Box sx={{ 
+                        color: '#000000', 
+                        fontSize: 32,
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          color: '#0073E5',
+                        },
+                      }}>
                         {feature.icon}
                       </Box>
                     </Box>
@@ -251,6 +300,206 @@ const LandingPage: React.FC = () => {
           </Box>
         </Box>
 
+        {/* Risk Analysis Section */}
+        <Box sx={{ 
+          background: 'linear-gradient(135deg, #0073E5 0%, #4d9eff 100%)',
+          borderRadius: 4,
+          p: 6,
+          mb: 8,
+          color: 'white',
+          animation: 'fadeInUp 1s ease-out 0.5s both',
+          '@keyframes fadeInUp': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateY(50px)',
+            },
+            '100%': {
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+          },
+        }}>
+          <Typography 
+            variant="h3" 
+            component="h2" 
+            textAlign="center" 
+            sx={{ 
+              mb: 6, 
+              fontWeight: 700,
+              color: 'white',
+              textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+              animation: 'slideInFromTop 1s ease-out 0.7s both',
+              '@keyframes slideInFromTop': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateY(-30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateY(0)',
+                },
+              },
+            }}
+          >
+            Risk Analysis - Fraud Summary
+          </Typography>
+          
+          <Box sx={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
+            {/* Fraud Breakdown by Category */}
+            <Box sx={{ 
+              flex: '1 1 400px', 
+              minWidth: 400,
+              animation: 'slideInFromLeft 1s ease-out 0.9s both',
+              '@keyframes slideInFromLeft': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(-50px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              },
+            }}>
+              <Typography 
+                variant="h5" 
+                component="h3" 
+                sx={{ 
+                  mb: 3, 
+                  fontWeight: 600,
+                  color: 'white',
+                  textAlign: 'center',
+                }}
+              >
+                Fraud Breakdown by Category
+              </Typography>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center',
+                background: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: 3,
+                p: 3,
+                backdropFilter: 'blur(10px)',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'scale(1.05)',
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                },
+              }}>
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: 20, label: 'Account Take Over', color: '#1e3a8a' },
+                        { id: 1, value: 25, label: 'Shipping Mismatch', color: '#3b82f6' },
+                        { id: 2, value: 25, label: 'Exposed Fraud', color: '#60a5fa' },
+                        { id: 3, value: 20, label: 'Topmail Fraud Ring', color: '#10b981' },
+                        { id: 4, value: 10, label: 'Other', color: '#f59e0b' },
+                      ],
+                      highlightScope: { highlight: 'item' },
+                    },
+                  ]}
+                  width={400}
+                  height={300}
+                />
+              </Box>
+            </Box>
+
+            {/* Gaps Mapping */}
+            <Box sx={{ 
+              flex: '1 1 400px', 
+              minWidth: 400,
+              animation: 'slideInFromRight 1s ease-out 1.1s both',
+              '@keyframes slideInFromRight': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateX(50px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                },
+              },
+            }}>
+              <Typography 
+                variant="h5" 
+                component="h3" 
+                sx={{ 
+                  mb: 3, 
+                  fontWeight: 600,
+                  color: 'white',
+                  textAlign: 'center',
+                }}
+              >
+                Gaps Mapping
+              </Typography>
+              <TableContainer 
+                component={Paper} 
+                sx={{ 
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: 3,
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+                  },
+                }}
+              >
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell sx={{ color: 'white', fontWeight: 600, borderBottom: '1px solid rgba(255, 255, 255, 0.2)' }}>
+                        Gap Type
+                      </TableCell>
+                      <TableCell sx={{ color: 'white', fontWeight: 600, borderBottom: '1px solid rgba(255, 255, 255, 0.2)' }}>
+                        Number of Chargebacks
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        Lack of phone number
+                      </TableCell>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        49
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        Unverified Email Address
+                      </TableCell>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        25
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        Billing-Shipping Mismatch
+                      </TableCell>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        24
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        Lack of IP
+                      </TableCell>
+                      <TableCell sx={{ color: 'white', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                        9
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+          </Box>
+        </Box>
+
         {/* CTA Section */}
         <Box sx={{ 
           textAlign: 'center', 
@@ -260,6 +509,17 @@ const LandingPage: React.FC = () => {
           borderRadius: 4,
           position: 'relative',
           overflow: 'hidden',
+          animation: 'fadeInUp 1s ease-out 1.3s both',
+          '@keyframes fadeInUp': {
+            '0%': {
+              opacity: 0,
+              transform: 'translateY(50px)',
+            },
+            '100%': {
+              opacity: 1,
+              transform: 'translateY(0)',
+            },
+          },
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -269,6 +529,17 @@ const LandingPage: React.FC = () => {
             bottom: 0,
             background: 'radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
             pointerEvents: 'none',
+            animation: 'pulse 4s ease-in-out infinite',
+            '@keyframes pulse': {
+              '0%, 100%': {
+                opacity: 0.5,
+                transform: 'scale(1)',
+              },
+              '50%': {
+                opacity: 0.8,
+                transform: 'scale(1.1)',
+              },
+            },
           }
         }}>
           <Box sx={{ position: 'relative', zIndex: 1 }}>
@@ -277,6 +548,17 @@ const LandingPage: React.FC = () => {
               color: 'white',
               mb: 3,
               textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+              animation: 'slideInFromTop 1s ease-out 1.5s both',
+              '@keyframes slideInFromTop': {
+                '0%': {
+                  opacity: 0,
+                  transform: 'translateY(-30px)',
+                },
+                '100%': {
+                  opacity: 1,
+                  transform: 'translateY(0)',
+                },
+              },
             }}>
               Ready to Protect Your Business?
             </Typography>
@@ -286,6 +568,15 @@ const LandingPage: React.FC = () => {
               fontWeight: 300,
               maxWidth: 600,
               mx: 'auto',
+              animation: 'fadeIn 1s ease-out 1.7s both',
+              '@keyframes fadeIn': {
+                '0%': {
+                  opacity: 0,
+                },
+                '100%': {
+                  opacity: 1,
+                },
+              },
             }}>
               Join thousands of businesses already using our fraud advisory platform to reduce chargebacks and maximize revenue
             </Typography>
@@ -302,10 +593,28 @@ const LandingPage: React.FC = () => {
                 background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
                 boxShadow: '0 8px 32px rgba(255, 107, 107, 0.4)',
                 textTransform: 'none',
+                animation: 'bounceIn 1s ease-out 1.9s both',
+                '@keyframes bounceIn': {
+                  '0%': {
+                    opacity: 0,
+                    transform: 'scale(0.3)',
+                  },
+                  '50%': {
+                    opacity: 1,
+                    transform: 'scale(1.05)',
+                  },
+                  '70%': {
+                    transform: 'scale(0.9)',
+                  },
+                  '100%': {
+                    opacity: 1,
+                    transform: 'scale(1)',
+                  },
+                },
                 '&:hover': {
                   background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
                   boxShadow: '0 12px 40px rgba(255, 107, 107, 0.5)',
-                  transform: 'translateY(-2px)',
+                  transform: 'translateY(-2px) scale(1.05)',
                   transition: 'all 0.3s ease',
                 },
                 transition: 'all 0.3s ease',

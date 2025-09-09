@@ -2,38 +2,36 @@ import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 
 const ChargebacksByIssuerChart: React.FC = () => {
-  const data = [
-    { issuer: 'Visa', count: 140 },
-    { issuer: 'MasterCard', count: 98 },
-    { issuer: 'American Express', count: 35 },
-  ];
+  const issuers = ['Visa', 'MasterCard', 'American Express'];
+  const chargebacksData = [142, 98, 36];
 
   return (
     <BarChart
-      dataset={data}
+      width={undefined}
+      height={300}
+      margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
       xAxis={[
         {
+          data: issuers,
           scaleType: 'band',
-          dataKey: 'issuer',
           label: 'Issuer',
         },
       ]}
       yAxis={[
         {
           label: 'Count',
+          min: 0,
+          max: 160,
         },
       ]}
       series={[
         {
-          dataKey: 'count',
-          label: 'Count',
-          color: '#0073E5',
+          data: chargebacksData,
+          label: 'Chargebacks',
         },
       ]}
-      colors={['#0073E5', '#e41e5b', '#4d9eff']}
-      width={undefined}
-      height={300}
-      margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+      colors={['#0073E5', '#e41e5b', '#9C27B0']}
+      grid={{ vertical: true, horizontal: true }}
     />
   );
 };
