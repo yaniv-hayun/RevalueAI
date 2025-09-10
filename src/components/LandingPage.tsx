@@ -18,6 +18,11 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import RevalueAILogo from './RevalueAILogo';
 
+/*
+Advanced Fraud
+Advisory Platform
+Protect your business with AI-powered fraud detection, comprehensive analytics, and actionable insights to reduce chargebacks and maximize your revenue.
+*/
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
