@@ -48,7 +48,7 @@ const Actions: React.FC = () => {
   const recommendedIntegrationData = [
     {
       id: 1,
-      source: 'ICXS',
+      source: 'ClearMyIp',
       requiredDataField: 'IP Address',
       projectedImprovement: '62%',
       estimatedCost: '$260 per month'
@@ -161,7 +161,7 @@ const Actions: React.FC = () => {
             <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
               Recommended Rules
             </Typography>
-            <Box sx={{ height: 400, width: '100%' }}>
+            <Box sx={{ height: "auto", width: '100%' }}>
               <DataGrid
                 rows={recommendedRulesData}
                 columns={rulesColumns}
@@ -186,6 +186,37 @@ const Actions: React.FC = () => {
                   },
                 }}
               />
+            </Box>
+            
+            {/* Summary Report */}
+            <Box sx={{ 
+              mt: 1, 
+              p: 2, 
+              backgroundColor: 'transparent', 
+              borderRadius: 1,
+              border: 'none'
+            }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: 'text.primary' }}>
+                Summary Report
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                <Box>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0.5 }}>
+                    Projected Fraud Coverage
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: 'success.main' }}>
+                    91%
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0.5 }}>
+                    Projected False Positive
+                  </Typography>
+                  <Typography variant="h5" sx={{ fontWeight: 700, color: 'error.main' }}>
+                    2.76%
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
           </CardContent>
         </Card>

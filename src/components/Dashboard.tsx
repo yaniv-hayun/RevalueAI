@@ -107,7 +107,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#e41e5b',
+                color: '#0073E5',
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#0073E5',
+                color: '#FA003F',
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -197,7 +197,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#e41e5b',
+                color: '#FA003F',
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -214,24 +214,6 @@ const Dashboard: React.FC = () => {
             minWidth: 200,
             maxWidth: 300,
             height: 120,
-            // background: (theme) => theme.palette.mode === 'dark' 
-            //   ? 'rgba(18, 18, 18, 0.95)' 
-            //   : 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'blur(10px)',
-            // border: (theme) => theme.palette.mode === 'dark' 
-            //   ? '1px solid rgba(255, 255, 255, 0.1)' 
-            //   : '1px solid rgba(255, 255, 255, 0.3)',
-            // borderRadius: 2,
-            // boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //   ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-            //   : '0 4px 20px rgba(0, 0, 0, 0.08)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   transform: 'translateY(-2px)',
-            //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //     ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-            //     : '0 8px 30px rgba(0, 0, 0, 0.12)',
-            // }
           }}
         >
           <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -270,23 +252,6 @@ const Dashboard: React.FC = () => {
           }}>
             <Card 
               elevation={0} 
-              sx={{ 
-                // height: { xs: 400, sm: 450 },
-              //   background: 'rgba(255, 255, 255, 0.95)',
-              //   backdropFilter: 'blur(10px)',
-              //   border: '1px solid rgba(255, 255, 255, 0.3)',
-              //   borderRadius: 2,
-              //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-              // ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-              // : '0 4px 20px rgba(0, 0, 0, 0.08)',
-              //   transition: 'all 0.3s ease',
-              //   '&:hover': {
-              //     transform: 'translateY(-2px)',
-              //     boxShadow: (theme) => theme.palette.mode === 'dark' 
-              //   ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-              //   : '0 8px 30px rgba(0, 0, 0, 0.12)',
-              //   }
-              }}
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
                 <Typography 
@@ -313,21 +278,7 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                // height: { xs: 400, sm: 450 },
-              //   background: 'rgba(255, 255, 255, 0.95)',
-              //   backdropFilter: 'blur(10px)',
-              //   border: '1px solid rgba(255, 255, 255, 0.3)',
-              //   borderRadius: 2,
-              //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-              // ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-              // : '0 4px 20px rgba(0, 0, 0, 0.08)',
-              //   transition: 'all 0.3s ease',
-              //   '&:hover': {
-              //     transform: 'translateY(-2px)',
-              //     boxShadow: (theme) => theme.palette.mode === 'dark' 
-              //   ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-              //   : '0 8px 30px rgba(0, 0, 0, 0.12)',
-              //   }
+         
               }}
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
@@ -364,21 +315,8 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                // height: { xs: 400, sm: 450 },
-              //   // background: 'rgba(255, 255, 255, 0.95)',
-              //   backdropFilter: 'blur(10px)',
-              //   border: '1px solid rgba(255, 255, 255, 0.3)',
-              //   borderRadius: 2,
-              //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-              // ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-              // : '0 4px 20px rgba(0, 0, 0, 0.08)',
-              //   transition: 'all 0.3s ease',
-              //   '&:hover': {
-              //     transform: 'translateY(-2px)',
-              //     boxShadow: (theme) => theme.palette.mode === 'dark' 
-              //   ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-              //   : '0 8px 30px rgba(0, 0, 0, 0.12)',
-              //   }
+                height: { xs: 400, sm: 400 },
+         
               }}
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>
@@ -409,21 +347,8 @@ const Dashboard: React.FC = () => {
             <Card 
               elevation={0} 
               sx={{ 
-                // height: { xs: 400, sm: 450 },
-                // background: 'rgba(255, 255, 255, 0.95)',
-              //   backdropFilter: 'blur(10px)',
-              //   border: '1px solid rgba(255, 255, 255, 0.3)',
-              //   borderRadius: 2,
-              //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-              // ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-              // : '0 4px 20px rgba(0, 0, 0, 0.08)',
-              //   transition: 'all 0.3s ease',
-              //   '&:hover': {
-              //     transform: 'translateY(-2px)',
-              //     boxShadow: (theme) => theme.palette.mode === 'dark' 
-              //   ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-              //   : '0 8px 30px rgba(0, 0, 0, 0.12)',
-              //   }
+                  height: { xs: 400, sm: 400 },
+         
               }}
             >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, height: '100%' }}>

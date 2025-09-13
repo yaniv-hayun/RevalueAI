@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Card, CardContent } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { RadarChart } from '@mui/x-charts/RadarChart';
 
 const Analytics: React.FC = () => {
   // Pie chart data for fraud breakdown
@@ -12,30 +12,9 @@ const Analytics: React.FC = () => {
     { id: 3, value: 10, label: 'Account Take Over', color: '#4caf50' },
   ];
 
-  // Data for gaps mapping table
-  const gapsData = [
-    { id: 1, gap: 'Lack of phone number', chargebacks: 49 },
-    { id: 2, gap: 'Unverified Email Address', chargebacks: 25 },
-    { id: 3, gap: 'Billing-Shipping Mismatch', chargebacks: 24 },
-    { id: 4, gap: 'Lack of IP', chargebacks: 9 },
-  ];
-
-  const columns: GridColDef[] = [
-    {
-      field: 'gap',
-      headerName: 'Gap',
-      width: 300,
-      headerAlign: 'center',
-      align: 'left',
-    },
-    {
-      field: 'chargebacks',
-      headerName: 'Number of Chargebacks',
-      width: 200,
-      headerAlign: 'center',
-      align: 'center',
-    },
-  ];
+  // Data for risk assessment radar chart
+  const riskAssessmentData = [78, 92, 52, 87, 82];
+  const riskCategories = ['Geos', 'Suspicious IP', 'Credit Card', 'Email Address', 'Phone Number'];
 
   return (
     <Box sx={{ p: 3 }}>
@@ -74,31 +53,24 @@ const Analytics: React.FC = () => {
           </Card>
         </Box>
 
-        {/* Gaps Mapping Table */}
+        {/* Risk Assessment Radar Chart */}
         <Box sx={{ flex: '1 1 45%', minWidth: 400 }}>
           <Card elevation={2} sx={{ height: '100%' }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
-                Gaps Mapping
+                Risk Assessment by Category
               </Typography>
-              <Box sx={{ height: 300, width: '100%' }}>
-                <DataGrid
-                  rows={gapsData}
-                  columns={columns}
-                  hideFooter
-                  disableRowSelectionOnClick
-                  sx={{
-                    border: 'none',
-                    '& .MuiDataGrid-cell': {
-                      borderBottom: '1px solid #e0e0e0',
-                    },
-                    '& .MuiDataGrid-columnHeaders': {
-                      backgroundColor: '#f5f5f5',
-                      borderBottom: '2px solid #e0e0e0',
-                    },
-                    '& .MuiDataGrid-columnHeader': {
-                      fontWeight: 600,
-                    },
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <RadarChart
+                  height={300}
+                  series={[{ 
+                    label: 'Risk Level', 
+                    data: riskAssessmentData,
+                    color: '#4caf50'
+                  }]}
+                  radar={{
+                    max: 100,
+                    metrics: riskCategories,
                   }}
                 />
               </Box>

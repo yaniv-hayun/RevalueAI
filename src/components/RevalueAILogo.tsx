@@ -54,12 +54,12 @@ const RevalueAILogo: React.FC<RevalueAILogoProps> = ({
               mb: showTagline ? 0.5 : 0,
             }}
           >
-            <Box component="span" sx={{ color: '#000' }}>
-              Rivalue
-            </Box>
-            <Box component="span" sx={{ color: '#06b6d4' }}>
-              AI
-            </Box>
+                <Box component="span" sx={{ color: '#FA003F' }}>
+            Rivalue
+          </Box>
+          <Box component="span" sx={{ color: '#0073E5' }}>
+            AI
+          </Box>
           </Typography>
           {showTagline && (
             <Typography
@@ -90,10 +90,10 @@ const RevalueAILogo: React.FC<RevalueAILogoProps> = ({
             mb: showTagline ? 0.5 : 0,
           }}
         >
-          <Box component="span" sx={{ color: '#000' }}>
+          <Box component="span" sx={{ color: '#FA003F' }}>
             Rivalue
           </Box>
-          <Box component="span" sx={{ color: '#06b6d4' }}>
+          <Box component="span" sx={{ color: '#0073E5' }}>
             AI
           </Box>
         </Typography>

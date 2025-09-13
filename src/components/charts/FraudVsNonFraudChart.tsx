@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import theme from '../../theme';
 
 const FraudVsNonFraudChart: React.FC = () => {
   const data = [
@@ -26,12 +27,11 @@ const FraudVsNonFraudChart: React.FC = () => {
         {
           dataKey: 'count',
           label: 'Count',
-          color: '#0073E5',
         },
       ]}
-      // width={undefined}
+      colors={['#0073E5']}
+    
       height={300}
-      // margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
       hideLegend={true}
     />
   );
