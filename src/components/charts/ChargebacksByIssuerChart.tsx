@@ -30,6 +30,7 @@ const ChargebacksByIssuerChart: React.FC = () => {
           label: 'Chargebacks',
         },
       ]}
+      hideLegend={true}
       colors={['#0073E5', '#e41e5b', '#9C27B0']}
       grid={{ vertical: true, horizontal: true }}
     />

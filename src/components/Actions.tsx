@@ -11,6 +11,7 @@ const Actions: React.FC = () => {
       rule: 'email_address ends with "@topmail"',
       projectedFraudCoverage: '20%',
       projectedFalsePositive: '0%',
+      exterbalApiRequired: 'No',
       tradeoffRanking: 'Highest',
       rankingColor: '#4caf50'
     },
@@ -19,6 +20,7 @@ const Actions: React.FC = () => {
       rule: 'icxs_ip_address_score >= 90 AND popular_email_domain',
       projectedFraudCoverage: '18%',
       projectedFalsePositive: '0.01%',
+      exterbalApiRequired: 'Yes',
       tradeoffRanking: 'Highest',
       rankingColor: '#4caf50'
     },
@@ -27,14 +29,16 @@ const Actions: React.FC = () => {
       rule: 'avs_result = "Negative" AND billing_address = shipping_address AND ip_billing_distance',
       projectedFraudCoverage: '34%',
       projectedFalsePositive: '0.75%',
+      exterbalApiRequired: 'No',
       tradeoffRanking: 'High',
       rankingColor: '#4caf50'
     },
     {
       id: 4,
-      rule: 'popular_email_domain is TRUE AND payment_processor_calculated_risk_score > 0.77',
+      rule: 'change icxs_ip to clear_my_ip_risk_score',
       projectedFraudCoverage: '19%',
       projectedFalsePositive: '2%',
+      exterbalApiRequired: 'No',
       tradeoffRanking: 'Medium',
       rankingColor: '#ff9800'
     }
@@ -55,34 +59,37 @@ const Actions: React.FC = () => {
     {
       field: 'rule',
       headerName: 'Rule',
-      width: 400,
-      headerAlign: 'center',
       align: 'left',
+      flex: 4,
     },
     {
       field: 'projectedFraudCoverage',
       headerName: 'Projected Fraud Coverage',
-      width: 200,
       headerAlign: 'center',
       align: 'center',
+      flex: 1,
     },
     {
       field: 'projectedFalsePositive',
       headerName: 'Projected False Positive',
-      width: 200,
-      headerAlign: 'center',
       align: 'center',
+      flex: 1,
+    },
+    {
+      field: 'exterbalApiRequired',
+      headerName: 'External API Required',
+      align: 'center',
+      flex: 1,
     },
     {
       field: 'tradeoffRanking',
       headerName: 'Tradeoff Ranking',
-      width: 150,
-      headerAlign: 'center',
-      align: 'center',
+      flex: 1,
       renderCell: (params) => (
         <Typography
           sx={{
             color: params.row.rankingColor,
+            mt: 2,
             fontWeight: 600,
           }}
         >
@@ -162,15 +169,20 @@ const Actions: React.FC = () => {
                 disableRowSelectionOnClick
                 sx={{
                   border: 'none',
+                  backgroundColor: 'transparent',
                   '& .MuiDataGrid-cell': {
                     borderBottom: '1px solid #e0e0e0',
+                    backgroundColor: 'transparent',
                   },
                   '& .MuiDataGrid-columnHeaders': {
-                    backgroundColor: '#f5f5f5',
-                    borderBottom: '2px solid #e0e0e0',
+                    backgroundColor: 'transparent',
+                    borderBottom: 'none',
                   },
                   '& .MuiDataGrid-columnHeader': {
                     fontWeight: 600,
+                  },
+                  '& .MuiDataGrid-root': {
+                    backgroundColor: 'transparent',
                   },
                 }}
               />
@@ -192,15 +204,20 @@ const Actions: React.FC = () => {
                 disableRowSelectionOnClick
                 sx={{
                   border: 'none',
+                  backgroundColor: 'transparent',
                   '& .MuiDataGrid-cell': {
                     borderBottom: '1px solid #e0e0e0',
+                    backgroundColor: 'transparent',
                   },
                   '& .MuiDataGrid-columnHeaders': {
-                    backgroundColor: '#f5f5f5',
-                    borderBottom: '2px solid #e0e0e0',
+                    backgroundColor: 'transparent',
+                    borderBottom: 'none',
                   },
                   '& .MuiDataGrid-columnHeader': {
                     fontWeight: 600,
+                  },
+                  '& .MuiDataGrid-root': {
+                    backgroundColor: 'transparent',
                   },
                 }}
               />

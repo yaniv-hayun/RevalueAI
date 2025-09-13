@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
-              $2,847,392
+              $12,847,392
             </Typography>
           </CardContent>
         </Card>
@@ -393,7 +393,7 @@ const Dashboard: React.FC = () => {
                   
                   }}
                 >
-                  Chargebacks and Amounts (with Projections)
+                  Incoming Chargebacks Trend
                 </Typography>
                 <Box sx={{ height: 'calc(100% - 50px)' }}>
                   <ChargebacksTrendChart />

@@ -32,6 +32,7 @@ const FraudVsNonFraudChart: React.FC = () => {
       // width={undefined}
       height={300}
       // margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
+      hideLegend={true}
     />
   );
 };

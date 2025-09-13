@@ -38,19 +38,19 @@ const ChargebacksTrendChart: React.FC = () => {
         },
         {
           data: chargebacksProjection,
-          label: 'Chargebacks (Projection)',
+          label: 'Projected Chargebacks Amount',
           color: '#4d9eff',
           curve: 'linear',
         },
         {
           data: amounts,
-          label: 'Amount ($)',
+          label: 'Chargebacks Amount',
           color: '#2E7D32',
           curve: 'linear',
         },
         {
           data: amountsProjection,
-          label: 'Amount (Projection)',
+          label: 'Projected Chargebacks',
           color: '#66BB6A',
           curve: 'linear',
         },

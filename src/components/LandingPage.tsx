@@ -73,13 +73,17 @@ const LandingPage: React.FC = () => {
           
           <Box sx={{ 
             display: 'flex', 
-            alignItems: 'center', 
+            alignItems: 'center',
+            justifyContent: 'center',
             minHeight: '80vh',
             gap: 6,
             flexWrap: 'wrap'
           }}>
             {/* Left Content */}
-            <Box sx={{ flex: '1 1 50%', minWidth: 300 }}>
+            <Box sx={{ 
+              flex: '1 1 50%', 
+              textAlign: 'center',
+            }}>
               <Typography 
                 variant="h3" 
                 component="h3" 
@@ -92,23 +96,10 @@ const LandingPage: React.FC = () => {
                   textShadow: '0 4px 20px rgba(0,0,0,0.3)',
                 }}
               >
-                
-AI Agent              </Typography>
+               Your Personal Risk Advisor 
+             </Typography>
               
-              <Typography 
-                variant="h3" 
-                sx={{ 
-                  mb: 4, 
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  fontWeight: 300,
-                  lineHeight: 1.6,
-                  maxWidth: 500,
-                }}
-              >
-                Fraud Detection Consultanct
-                </Typography>
-              
-              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4 }}>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4, justifyContent: 'center' }}>
                 <Button 
                   variant="contained" 
                   size="large"
@@ -149,67 +140,8 @@ AI Agent              </Typography>
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Watch a demo
+                  Book a demo
                 </Button>
-              </Box>
-
-         
-            </Box>
-
-            {/* Right Content - Dashboard Preview */}
-            <Box sx={{ flex: '1 1 40%', minWidth: 300 }}>
-              <Box sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: 3,
-                p: 3,
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                animation: 'float 6s ease-in-out infinite',
-                '@keyframes float': {
-                  '0%, 100%': { transform: 'translateY(0px)' },
-                  '50%': { transform: 'translateY(-20px)' },
-                },
-              }}>
-                <Typography variant="h6" sx={{ color: 'white', mb: 2, textAlign: 'center' }}>
-                  Fraud Analytics Dashboard
-                </Typography>
-                <Box sx={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: '1fr 1fr', 
-                  gap: 2,
-                  mb: 2 
-                }}>
-                  <Box sx={{ 
-                    background: 'rgba(255, 255, 255, 0.2)', 
-                    p: 2, 
-                    borderRadius: 2,
-                    textAlign: 'center'
-                  }}>
-                    <Typography variant="h4" sx={{ color: 'white', fontWeight: 700 }}>$2.8M</Typography>
-                    <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>Total Volume</Typography>
-                  </Box>
-                  <Box sx={{ 
-                    background: 'rgba(255, 255, 255, 0.2)', 
-                    p: 2, 
-                    borderRadius: 2,
-                    textAlign: 'center'
-                  }}>
-                    <Typography variant="h4" sx={{ color: 'white', fontWeight: 700 }}>89</Typography>
-                    <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>Chargebacks</Typography>
-                  </Box>
-                </Box>
-                <Box sx={{ 
-                  height: 120, 
-                  background: 'rgba(255, 255, 255, 0.1)', 
-                  borderRadius: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-                    Real-time Fraud Detection
-                  </Typography>
-                </Box>
               </Box>
             </Box>
           </Box>
@@ -283,47 +215,6 @@ AI Agent              </Typography>
           </Box>
         </Box>
 
-        {/* Testimonial Section */}
-        <Box sx={{ mb: 8, textAlign: 'center' }}>
-          <Box sx={{ 
-            background: '#f8f9fa',
-            borderRadius: 3,
-            p: 6,
-            maxWidth: 800,
-            mx: 'auto',
-            mb: 6,
-          }}>
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                mb: 4, 
-                fontWeight: 600,
-                color: '#2c3e50',
-                fontStyle: 'italic',
-                lineHeight: 1.6,
-              }}
-            >
-              "With RevalueAI's help, we've seen a <strong>95% decrease</strong> in fraud losses, a <strong>30 minute</strong> faster detection time and our security score is <strong>up to 98%</strong>."
-            </Typography>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: 600,
-                color: '#1e3a8a',
-              }}
-            >
-              Sarah Johnson
-            </Typography>
-            <Typography 
-              variant="body2" 
-              sx={{ 
-                color: '#5a6c7d',
-              }}
-            >
-              CEO Founder at TechCorp
-            </Typography>
-          </Box>
-        </Box>
 
         {/* Knowledge Base & Live Chat Section */}
         <Box sx={{ mb: 8 }}>
@@ -452,34 +343,7 @@ AI Agent              </Typography>
             RevalueAI is the partner of choice for many of the world's leading enterprises, SMEs, and technology challenges. We help businesses elevate their security through custom fraud detection solutions.
           </Typography>
           
-          <Box sx={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Button 
-              variant="contained" 
-              size="large"
-              sx={{ 
-                px: 6, 
-                py: 2,
-                fontSize: '1rem',
-                fontWeight: 600,
-                borderRadius: 2,
-                background: '#1e3a8a',
-                textTransform: 'none',
-                '&:hover': {
-                  background: '#1e40af',
-                },
-              }}
-            >
-              Submit a ticket
-            </Button>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 600, color: '#2c3e50', mb: 1 }}>
-                Call Direct 24/7
-              </Typography>
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e3a8a' }}>
-                +1-800-456-478-23
-              </Typography>
-            </Box>
-          </Box>
+
         </Box>
 
         {/* Pricing Section */}
@@ -508,7 +372,7 @@ AI Agent              </Typography>
             You can choose to pay monthly or annually. Don't worry! You can cancel anytime
           </Typography>
           
-          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center', pt: 2 }}>
             {[
               {
                 name: 'Starter',
@@ -519,22 +383,22 @@ AI Agent              </Typography>
               },
               {
                 name: 'Professional',
-                price: '$59',
+                price: '$300',
                 period: '/month',
                 features: ['3 Users', '3 Dashboards', '10 Projects', 'Advanced Analytics', 'Priority Support'],
                 popular: true
               },
               {
                 name: 'Business',
-                price: '$99',
+                price: '$500',
                 period: '/month',
                 features: ['20 Users', 'Unlimited Dashboards', '50 Projects', 'Custom Integrations', '24/7 Support'],
                 popular: false
               },
               {
                 name: 'Enterprise',
-                price: '$129',
-                period: '/month',
+                price: 'Contact us',
+                period: '',
                 features: ['Unlimited Users', 'Unlimited Dashboards', 'Unlimited Projects', 'Custom Development', 'Dedicated Support'],
                 popular: false
               }
@@ -560,16 +424,17 @@ AI Agent              </Typography>
                 {plan.popular && (
                   <Box sx={{
                     position: 'absolute',
-                    top: -10,
+                    top: 0,
                     left: '50%',
                     transform: 'translateX(-50%)',
                     background: '#ff6b6b',
                     color: 'white',
-                    px: 2,
-                    py: 0.5,
+                    px: 3,
+                    py: 1,
                     borderRadius: 1,
                     fontSize: '0.75rem',
                     fontWeight: 600,
+                    zIndex: 1,
                   }}>
                     Most Popular
                   </Box>
@@ -640,33 +505,6 @@ AI Agent              </Typography>
           }}>
             Do you have a large team? Contact us for information about more enterprise options
           </Typography>
-        </Box>
-
-        {/* Stats Section */}
-        <Box sx={{ mb: 8, textAlign: 'center' }}>
-          <Box sx={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {[
-              { number: '10M+', label: 'Users protected & transactions analyzed' },
-              { number: '50K+', label: 'Fraud attempts blocked everyday' },
-              { number: '5K+', label: 'Happy clients satisfied on worldwide' }
-            ].map((stat, index) => (
-              <Box key={index} sx={{ textAlign: 'center' }}>
-                <Typography variant="h2" sx={{ 
-                  fontWeight: 800,
-                  color: '#1e3a8a',
-                  mb: 1,
-                }}>
-                  {stat.number}
-                </Typography>
-                <Typography variant="h6" sx={{ 
-                  color: '#5a6c7d',
-                  fontWeight: 500,
-                }}>
-                  {stat.label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
         </Box>
 
         {/* Final CTA Section */}

@@ -36,6 +36,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useTheme as useCustomTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import RevalueAILogo from './RevalueAILogo';
 
 const drawerWidth = 240;
 
@@ -209,9 +210,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Fraud Advisory Dashboard
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+            <RevalueAILogo size="small" showTagline={false} variant="horizontal" />
+            {/* <Typography variant="h6" noWrap component="div" sx={{ ml: 2 }}>
+              Fraud Advisory Dashboard
+            </Typography> */}
+          </Box>
           <IconButton
             onClick={toggleTheme}
             color="inherit"
@@ -228,6 +232,8 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+ 
+         
         <Divider />
         <List>
           {mainMenuItems.map((item) => (

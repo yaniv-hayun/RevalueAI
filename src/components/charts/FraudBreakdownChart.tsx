@@ -31,6 +31,8 @@ const FraudBreakdownChart: React.FC = () => {
       ]}
       // width={undefined}
       height={300}
+      hideLegend={true}
+
       // margin={{ left: 60, right: 20, top: 20, bottom: 60 }}
     />
   );
