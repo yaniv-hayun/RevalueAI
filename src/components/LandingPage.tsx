@@ -53,7 +53,7 @@ const LandingPage: React.FC = () => {
     <Box sx={{ flexGrow: 1 }}>
       {/* Hero Section */}
       <Box sx={{
-        background: 'linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%)',
+        background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)',
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
@@ -85,15 +85,15 @@ const LandingPage: React.FC = () => {
               textAlign: 'center',
             }}>
               <Typography 
-                variant="h3" 
-                component="h3" 
+                variant="h2" 
+                component="h1" 
                 gutterBottom
                 sx={{ 
-                  fontWeight: 800,
-                  lineHeight: 1.1,
+                  fontWeight: 700,
+                  lineHeight: 1.2,
                   color: 'white',
                   mb: 3,
-                  textShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                  fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                 }}
               >
                Your Personal Risk Advisor 
@@ -105,15 +105,15 @@ const LandingPage: React.FC = () => {
                   size="large"
                   onClick={() => navigate('/login')}
                   sx={{ 
-                    px: 4, 
-                    py: 2,
-                    fontSize: '1rem',
+                    px: 6, 
+                    py: 2.5,
+                    fontSize: '1.1rem',
                     fontWeight: 600,
                     borderRadius: 2,
-                    background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
+                    background: '#FA003F',
                     textTransform: 'none',
                     '&:hover': {
-                      background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
+                      background: '#e6003a',
                       transform: 'translateY(-2px)',
                     },
                     transition: 'all 0.3s ease',
@@ -125,12 +125,13 @@ const LandingPage: React.FC = () => {
                   variant="outlined" 
                   size="large"
                   sx={{ 
-                    px: 4, 
-                    py: 2,
-                    fontSize: '1rem',
+                    px: 6, 
+                    py: 2.5,
+                    fontSize: '1.1rem',
                     fontWeight: 600,
                     borderRadius: 2,
-                    borderColor: 'rgba(255, 255, 255, 0.5)',
+                    borderColor: 'white',
+                    borderWidth: 2,
                     color: 'white',
                     textTransform: 'none',
                     '&:hover': {
@@ -158,7 +159,7 @@ const LandingPage: React.FC = () => {
             sx={{ 
               mb: 6, 
               fontWeight: 700,
-              color: '#2c3e50',
+              color: '#1e3a8a',
             }}
           >
             What you can do with RevalueAI's Fraud Detection
@@ -181,16 +182,16 @@ const LandingPage: React.FC = () => {
             ].map((feature, index) => (
               <Box key={index} sx={{ flex: '1 1 30%', minWidth: 300 }}>
                 <Card 
-                  elevation={0} 
+                  elevation={2} 
                   sx={{ 
                     height: '100%',
                     background: 'white',
-                    border: '1px solid #e0e0e0',
+                    border: '1px solid #e5e7eb',
                     borderRadius: 2,
                     transition: 'all 0.3s ease',
                     '&:hover': {
-                      transform: 'translateY(-5px)',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 12px 24px rgba(0,0,0,0.1)',
                     },
                   }}
                 >
@@ -203,7 +204,7 @@ const LandingPage: React.FC = () => {
                       {feature.title}
                     </Typography>
                     <Typography variant="body1" sx={{ 
-                      color: '#5a6c7d',
+                      color: '#6b7280',
                       lineHeight: 1.6,
                     }}>
                       {feature.description}
@@ -221,16 +222,16 @@ const LandingPage: React.FC = () => {
           <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
             <Box sx={{ flex: '1 1 45%', minWidth: 300 }}>
               <Card 
-                elevation={0} 
+                elevation={2} 
                 sx={{ 
                   height: '100%',
                   background: 'white',
-                  border: '1px solid #e0e0e0',
+                  border: '1px solid #e5e7eb',
                   borderRadius: 2,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 12px 24px rgba(0,0,0,0.1)',
                   },
                 }}
               >
@@ -243,7 +244,7 @@ const LandingPage: React.FC = () => {
                     Knowledge Base
                   </Typography>
                   <Typography variant="body1" sx={{ 
-                    color: '#5a6c7d',
+                    color: '#6b7280',
                     lineHeight: 1.6,
                     mb: 3,
                   }}>
@@ -269,16 +270,16 @@ const LandingPage: React.FC = () => {
             
             <Box sx={{ flex: '1 1 45%', minWidth: 300 }}>
               <Card 
-                elevation={0} 
+                elevation={2} 
                 sx={{ 
                   height: '100%',
                   background: 'white',
-                  border: '1px solid #e0e0e0',
+                  border: '1px solid #e5e7eb',
                   borderRadius: 2,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 12px 24px rgba(0,0,0,0.1)',
                   },
                 }}
               >
@@ -291,7 +292,7 @@ const LandingPage: React.FC = () => {
                     Live Support
                   </Typography>
                   <Typography variant="body1" sx={{ 
-                    color: '#5a6c7d',
+                    color: '#6b7280',
                     lineHeight: 1.6,
                     mb: 3,
                   }}>
@@ -325,7 +326,7 @@ const LandingPage: React.FC = () => {
             sx={{ 
               mb: 2, 
               fontWeight: 700,
-              color: '#2c3e50',
+              color: '#1e3a8a',
             }}
           >
             No solution found?
@@ -334,8 +335,8 @@ const LandingPage: React.FC = () => {
             variant="h6" 
             sx={{ 
               mb: 6, 
-              color: '#5a6c7d',
-              fontWeight: 300,
+              color: '#6b7280',
+              fontWeight: 400,
               maxWidth: 600,
               mx: 'auto',
             }}
@@ -354,7 +355,7 @@ const LandingPage: React.FC = () => {
             sx={{ 
               mb: 2, 
               fontWeight: 700,
-              color: '#2c3e50',
+              color: '#1e3a8a',
             }}
           >
             Kick-start with an affordable
@@ -363,8 +364,8 @@ const LandingPage: React.FC = () => {
             variant="h6" 
             sx={{ 
               mb: 6, 
-              color: '#5a6c7d',
-              fontWeight: 300,
+              color: '#6b7280',
+              fontWeight: 400,
               maxWidth: 600,
               mx: 'auto',
             }}
@@ -442,7 +443,7 @@ const LandingPage: React.FC = () => {
                 <CardContent sx={{ p: 4, textAlign: 'center' }}>
                   <Typography variant="h5" sx={{ 
                     fontWeight: 600,
-                    color: plan.popular ? 'white' : '#2c3e50',
+                    color: plan.popular ? 'white' : '#1e3a8a',
                     mb: 1,
                   }}>
                     {plan.name}
@@ -456,14 +457,14 @@ const LandingPage: React.FC = () => {
                       {plan.price}
                     </Typography>
                     <Typography variant="h6" sx={{ 
-                      color: plan.popular ? 'rgba(255,255,255,0.8)' : '#5a6c7d',
+                      color: plan.popular ? 'rgba(255,255,255,0.8)' : '#6b7280',
                       display: 'inline',
                     }}>
                       {plan.period}
                     </Typography>
                   </Box>
                   <Typography variant="body2" sx={{ 
-                    color: plan.popular ? 'rgba(255,255,255,0.8)' : '#5a6c7d',
+                    color: plan.popular ? 'rgba(255,255,255,0.8)' : '#6b7280',
                     mb: 3,
                   }}>
                     Free with 14 days trial, then you can choose a plan.
@@ -471,7 +472,7 @@ const LandingPage: React.FC = () => {
                   <Box sx={{ mb: 3 }}>
                     {plan.features.map((feature, idx) => (
                       <Typography key={idx} variant="body2" sx={{ 
-                        color: plan.popular ? 'rgba(255,255,255,0.9)' : '#5a6c7d',
+                        color: plan.popular ? 'rgba(255,255,255,0.9)' : '#6b7280',
                         mb: 1,
                       }}>
                         • {feature}
@@ -501,7 +502,7 @@ const LandingPage: React.FC = () => {
           
           <Typography variant="body2" sx={{ 
             mt: 4,
-            color: '#5a6c7d',
+            color: '#6b7280',
           }}>
             Do you have a large team? Contact us for information about more enterprise options
           </Typography>
@@ -512,7 +513,7 @@ const LandingPage: React.FC = () => {
           textAlign: 'center', 
           mt: 8, 
           p: 8,
-          background: 'linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%)',
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
           borderRadius: 4,
           color: 'white',
         }}>
@@ -527,7 +528,7 @@ const LandingPage: React.FC = () => {
           <Typography variant="h6" sx={{ 
             mb: 4,
             color: 'rgba(255, 255, 255, 0.9)',
-            fontWeight: 300,
+            fontWeight: 400,
             maxWidth: 600,
             mx: 'auto',
           }}>
@@ -544,10 +545,10 @@ const LandingPage: React.FC = () => {
                 fontSize: '1.2rem',
                 fontWeight: 600,
                 borderRadius: 2,
-                background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
+                background: '#FA003F',
                 textTransform: 'none',
                 '&:hover': {
-                  background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
+                  background: '#e6003a',
                   transform: 'translateY(-2px)',
                 },
                 transition: 'all 0.3s ease',
@@ -582,9 +583,9 @@ const LandingPage: React.FC = () => {
           </Box>
           
           <Typography variant="body2" sx={{ 
-            color: 'rgba(255, 255, 255, 0.7)',
+            color: 'rgba(255, 255, 255, 0.8)',
           }}>
-            Find us on social media
+            No credit card required • 15-day free trial • Cancel anytime
           </Typography>
         </Box>
       </Container>
