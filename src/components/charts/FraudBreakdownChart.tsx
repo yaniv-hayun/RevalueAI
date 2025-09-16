@@ -26,7 +26,7 @@ const FraudBreakdownChart: React.FC = () => {
         {
           dataKey: 'count',
           label: 'Count',
-          color: '#e41e5b',
+          color: '#0073E5',
         },
       ]}
       // width={undefined}
