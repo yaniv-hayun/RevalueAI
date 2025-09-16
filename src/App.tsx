@@ -6,6 +6,7 @@ import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
 import Analytics from './components/Analytics';
 import Actions from './components/Actions';
+import Chargebacks from './components/Chargebacks';
 import Layout from './components/Layout';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -70,6 +71,16 @@ const App: React.FC = () => {
               <ProtectedRoute>
                 <Layout>
                   <Actions />
+                </Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/chargebacks" 
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Chargebacks />
                 </Layout>
               </ProtectedRoute>
             } 

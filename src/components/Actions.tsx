@@ -157,6 +157,87 @@ const Actions: React.FC = () => {
       }
     };
 
+    // Helper function to draw table
+    const drawTable = (headers: string[], data: any[], colWidths: number[], startY: number) => {
+      const tableStartX = 20;
+      const headerHeight = 12;
+      const cellPadding = 3;
+      
+      // Calculate row heights dynamically
+      const rowHeights: number[] = [];
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      
+      data.forEach((row) => {
+        let maxLines = 1;
+        Object.values(row).forEach((value, colIndex) => {
+          if (colIndex === 0) {
+            // First column - check for text wrapping
+            const lines = doc.splitTextToSize(String(value), colWidths[colIndex] - 10);
+            maxLines = Math.max(maxLines, lines.length);
+          }
+        });
+        rowHeights.push(Math.max(8, maxLines * 6 + cellPadding));
+      });
+      
+      // Calculate total table height
+      const tableWidth = colWidths.reduce((sum, width) => sum + width, 0);
+      const totalDataHeight = rowHeights.reduce((sum, height) => sum + height, 0);
+      const tableHeight = headerHeight + totalDataHeight;
+      
+      // Draw outer border
+      doc.rect(tableStartX, startY, tableWidth, tableHeight);
+      
+      // Draw header row background
+      doc.setFillColor(240, 240, 240);
+      doc.rect(tableStartX, startY, tableWidth, headerHeight, 'F');
+      
+      // Draw column borders
+      let currentX = tableStartX;
+      for (let i = 0; i < colWidths.length - 1; i++) {
+        currentX += colWidths[i];
+        doc.line(currentX, startY, currentX, startY + tableHeight);
+      }
+      
+      // Add header text (smaller font)
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      currentX = tableStartX + 3;
+      headers.forEach((header, index) => {
+        doc.text(header, currentX, startY + 8);
+        currentX += colWidths[index];
+      });
+      
+      // Draw row borders and add data text
+      doc.setFont('helvetica', 'normal');
+      let currentY = startY + headerHeight;
+      
+      data.forEach((row, rowIndex) => {
+        const rowHeight = rowHeights[rowIndex];
+        
+        // Draw horizontal line for this row
+        doc.line(tableStartX, currentY, tableStartX + tableWidth, currentY);
+        
+        // Add data text
+        currentX = tableStartX + 3;
+        Object.values(row).forEach((value, colIndex) => {
+          if (colIndex === 0) {
+            // First column - wrap text
+            const lines = doc.splitTextToSize(String(value), colWidths[colIndex] - 10);
+            doc.text(lines, currentX, currentY + 6);
+          } else {
+            // Other columns - single line
+            doc.text(String(value), currentX, currentY + 6);
+          }
+          currentX += colWidths[colIndex];
+        });
+        
+        currentY += rowHeight;
+      });
+      
+      return startY + tableHeight + 15;
+    };
+
     // Title
     doc.setFontSize(20);
     doc.setFont('helvetica', 'bold');
@@ -183,85 +264,43 @@ const Actions: React.FC = () => {
     yPosition += 20;
 
     // Recommended Rules Section
-    checkNewPage(100);
+    checkNewPage(150);
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     yPosition = addText('Recommended Rules', 20, yPosition);
     yPosition += 10;
 
-    // Rules table headers
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    const headers = ['Rule', 'Fraud Coverage', 'False Positive', 'API Required', 'Ranking'];
-    const colWidths = [80, 25, 25, 25, 20];
-    let xPosition = 20;
-
-    headers.forEach((header, index) => {
-      doc.text(header, xPosition, yPosition);
-      xPosition += colWidths[index];
-    });
-    yPosition += 10;
-
-    // Rules data
-    doc.setFont('helvetica', 'normal');
-    recommendedRulesData.forEach((rule) => {
-      checkNewPage(20);
-      xPosition = 20;
-      
-      // Rule text (wrapped)
-      const ruleLines = doc.splitTextToSize(rule.rule, colWidths[0]);
-      doc.text(ruleLines, xPosition, yPosition);
-      const maxLines = ruleLines.length;
-      
-      // Other columns
-      xPosition += colWidths[0];
-      doc.text(rule.projectedFraudCoverage, xPosition, yPosition);
-      xPosition += colWidths[1];
-      doc.text(rule.projectedFalsePositive, xPosition, yPosition);
-      xPosition += colWidths[2];
-      doc.text(rule.exterbalApiRequired, xPosition, yPosition);
-      xPosition += colWidths[3];
-      doc.text(rule.tradeoffRanking, xPosition, yPosition);
-      
-      yPosition += Math.max(maxLines * 5, 10);
-    });
-
-    yPosition += 20;
+    // Rules table
+    const rulesHeaders = ['Rule', 'Fraud Coverage', 'False Positive', 'API Required', 'Ranking'];
+    const rulesColWidths = [80, 25, 25, 25, 20];
+    const rulesData = recommendedRulesData.map(rule => ({
+      rule: rule.rule,
+      fraudCoverage: rule.projectedFraudCoverage,
+      falsePositive: rule.projectedFalsePositive,
+      apiRequired: rule.exterbalApiRequired,
+      ranking: rule.tradeoffRanking
+    }));
+    
+    yPosition = drawTable(rulesHeaders, rulesData, rulesColWidths, yPosition);
 
     // Recommended Integration Section
-    checkNewPage(50);
+    checkNewPage(80);
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
     yPosition = addText('Recommended Integration', 20, yPosition);
     yPosition += 10;
 
-    // Integration table headers
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
+    // Integration table
     const integrationHeaders = ['Source', 'Required Data Field', 'Projected Improvement', 'Estimated Cost'];
     const integrationColWidths = [40, 50, 40, 40];
-    xPosition = 20;
-
-    integrationHeaders.forEach((header, index) => {
-      doc.text(header, xPosition, yPosition);
-      xPosition += integrationColWidths[index];
-    });
-    yPosition += 10;
-
-    // Integration data
-    doc.setFont('helvetica', 'normal');
-    recommendedIntegrationData.forEach((integration) => {
-      checkNewPage(15);
-      xPosition = 20;
-      doc.text(integration.source, xPosition, yPosition);
-      xPosition += integrationColWidths[0];
-      doc.text(integration.requiredDataField, xPosition, yPosition);
-      xPosition += integrationColWidths[1];
-      doc.text(integration.projectedImprovement, xPosition, yPosition);
-      xPosition += integrationColWidths[2];
-      doc.text(integration.estimatedCost, xPosition, yPosition);
-      yPosition += 10;
-    });
+    const integrationData = recommendedIntegrationData.map(integration => ({
+      source: integration.source,
+      dataField: integration.requiredDataField,
+      improvement: integration.projectedImprovement,
+      cost: integration.estimatedCost
+    }));
+    
+    yPosition = drawTable(integrationHeaders, integrationData, integrationColWidths, yPosition);
 
     // Footer
     yPosition = pageHeight - 20;

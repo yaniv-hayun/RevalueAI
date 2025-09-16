@@ -39,7 +39,7 @@ export const lightTheme = createTheme({
       main: colors.success,
     },
     background: {
-      default: '#fafafa',
+      default: '#f0f0f0',
       paper: '#ffffff',
     },
     text: {
@@ -74,15 +74,70 @@ export const lightTheme = createTheme({
         root: {
           backgroundColor: '#ffffff',
           color: '#212121',
-          boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.12)',
+          boxShadow: 'none',
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+          boxShadow: 'none',
           borderRadius: 12,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
         },
       },
     },
@@ -153,15 +208,70 @@ export const darkTheme = createTheme({
         root: {
           backgroundColor: '#1e1e1e',
           color: '#ffffff',
-          boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.3)',
+          boxShadow: 'none',
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.3)',
+          boxShadow: 'none',
           borderRadius: 12,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+          '&:active': {
+            boxShadow: 'none',
+          },
+          '&:focus': {
+            boxShadow: 'none',
+          },
         },
       },
     },

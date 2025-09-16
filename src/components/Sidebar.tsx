@@ -30,6 +30,13 @@ import {
   Logout as LogoutIcon,
   AccountCircle,
   PlayArrow as ActionsIcon,
+  Receipt as ChargebacksIcon,
+  Apps as AppsIcon,
+  CloudUpload as UploadIcon,
+  Api as ApiIcon,
+  Store as ShopifyIcon,
+  Payment as StripeIcon,
+  ShoppingCart as WooCommerceIcon,
 } from '@mui/icons-material';
 import Popover from '@mui/material/Popover';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -134,6 +141,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
   const [profileAnchorEl, setProfileAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [integrationAnchorEl, setIntegrationAnchorEl] = React.useState<HTMLElement | null>(null);
   const [imageError, setImageError] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -166,7 +174,22 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     handleUserLogout();
   };
 
+  const handleIntegrationClick = (event: React.MouseEvent<HTMLElement>) => {
+    setIntegrationAnchorEl(event.currentTarget);
+  };
+
+  const handleIntegrationClose = () => {
+    setIntegrationAnchorEl(null);
+  };
+
+  const handleIntegrationSelect = (integration: string) => {
+    console.log(`Selected integration: ${integration}`);
+    handleIntegrationClose();
+    // Here you can add navigation or other logic for each integration
+  };
+
   const profileOpen = Boolean(profileAnchorEl);
+  const integrationOpen = Boolean(integrationAnchorEl);
 
   const handleImageError = () => {
     setImageError(true);
@@ -181,16 +204,50 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Analytics', icon: <AnalyticsIcon />, path: '/analytics' },
     { text: 'Actions', icon: <ActionsIcon />, path: '/actions' },
-    { text: 'Fraud Detection', icon: <SecurityIcon />, path: '/fraud-detection' },
-    { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
+    { text: 'Chargebacks', icon: <ChargebacksIcon />, path: '/chargebacks' },
+    // { text: 'Fraud Detection', icon: <SecurityIcon />, path: '/fraud-detection' },
+    // { text: 'Reports', icon: <AssessmentIcon />, path: '/reports' },
   ];
 
-  const secondaryMenuItems = [
-    { text: 'Trends', icon: <TrendingUpIcon />, path: '/trends' },
-    { text: 'Transactions', icon: <AccountBalanceIcon />, path: '/transactions' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
-    { text: 'Help', icon: <HelpIcon />, path: '/help' },
+  const integrationOptions = [
+    { 
+      name: 'Upload CSV', 
+      icon: <UploadIcon />, 
+      description: 'Upload transaction data via CSV file',
+      action: 'upload-csv'
+    },
+    { 
+      name: 'API Integration', 
+      icon: <ApiIcon />, 
+      description: 'Connect via REST API',
+      action: 'api'
+    },
+    { 
+      name: 'Shopify', 
+      icon: <ShopifyIcon />, 
+      description: 'Connect your Shopify store',
+      action: 'shopify'
+    },
+    { 
+      name: 'Stripe', 
+      icon: <StripeIcon />, 
+      description: 'Connect your Stripe account',
+      action: 'stripe'
+    },
+    { 
+      name: 'WooCommerce', 
+      icon: <WooCommerceIcon />, 
+      description: 'Connect your WooCommerce store',
+      action: 'woocommerce'
+    },
   ];
+
+  // const secondaryMenuItems = [
+  //   { text: 'Trends', icon: <TrendingUpIcon />, path: '/trends' },
+  //   { text: 'Transactions', icon: <AccountBalanceIcon />, path: '/transactions' },
+  //   { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  //   { text: 'Help', icon: <HelpIcon />, path: '/help' },
+  // ];
 
   return (
     <Box sx={{ display: 'flex', bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -216,6 +273,14 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
               Fraud Advisory Dashboard
             </Typography> */}
           </Box>
+          <IconButton
+            onClick={handleIntegrationClick}
+            color="inherit"
+            aria-label="integration options"
+            sx={{ mr: 1 }}
+          >
+            <AppsIcon />
+          </IconButton>
           <IconButton
             onClick={toggleTheme}
             color="inherit"
@@ -288,7 +353,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             </ListItem>
           ))}
         </List>
-        <Divider />
+        {/* <Divider />
         <List>
           {secondaryMenuItems.map((item) => (
             <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
@@ -341,7 +406,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
+        </List> */}
         
         {/* User Profile Section */}
         <Box sx={{ 
@@ -358,10 +423,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             sx={{ 
               display: 'flex', 
               alignItems: 'center', 
-              gap: 2,
+              justifyContent: open ? 'flex-start' : 'center',
+              gap: open ? 2 : 0,
               cursor: 'pointer',
               borderRadius: 1,
               p: 1,
+              width: '100%',
               '&:hover': {
                 backgroundColor: 'action.hover',
               },
@@ -478,6 +545,79 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                   />
                 </ListItemButton>
               </ListItem>
+            </List>
+          </Box>
+        </Popover>
+
+        {/* Integration Popover */}
+        <Popover
+          open={integrationOpen}
+          anchorEl={integrationAnchorEl}
+          onClose={handleIntegrationClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          sx={{
+            '& .MuiPopover-paper': {
+              minWidth: 320,
+              borderRadius: 2,
+              boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+            }
+          }}
+        >
+          <Box sx={{ p: 2 }}>
+            {/* Integration Header */}
+            <Box sx={{ mb: 2, pb: 2, borderBottom: 1, borderColor: 'divider' }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                Choose Integration Method
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Select how you want to integrate with RevalueAI
+              </Typography>
+            </Box>
+
+            {/* Integration Options */}
+            <List sx={{ p: 0 }}>
+              {integrationOptions.map((option) => (
+                <ListItem key={option.action} disablePadding sx={{ mb: 1 }}>
+                  <ListItemButton 
+                    onClick={() => handleIntegrationSelect(option.action)}
+                    sx={{ 
+                      borderRadius: 1,
+                      p: 2,
+                      '&:hover': {
+                        backgroundColor: 'primary.light',
+                        color: 'primary.contrastText',
+                        '& .MuiListItemIcon-root': {
+                          color: 'primary.contrastText',
+                        }
+                      }
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 48, color: 'primary.main' }}>
+                      {option.icon}
+                    </ListItemIcon>
+                    <Box sx={{ flex: 1 }}>
+                      <ListItemText 
+                        primary={option.name}
+                        secondary={option.description}
+                        primaryTypographyProps={{ 
+                          fontWeight: 600,
+                          fontSize: '0.95rem'
+                        }}
+                        secondaryTypographyProps={{
+                          fontSize: '0.8rem'
+                        }}
+                      />
+                    </Box>
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
           </Box>
         </Popover>
