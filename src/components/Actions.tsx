@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Card, CardContent, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Download } from '@mui/icons-material';
+import jsPDF from 'jspdf';
 
 const Actions: React.FC = () => {
   // Data for recommended rules table
@@ -130,15 +131,155 @@ const Actions: React.FC = () => {
     },
   ];
 
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    let yPosition = 20;
+
+    // Helper function to add text with word wrapping
+    const addText = (text: string, x: number, y: number, maxWidth?: number) => {
+      if (maxWidth) {
+        const lines = doc.splitTextToSize(text, maxWidth);
+        doc.text(lines, x, y);
+        return y + (lines.length * 7);
+      } else {
+        doc.text(text, x, y);
+        return y + 7;
+      }
+    };
+
+    // Helper function to add a new page if needed
+    const checkNewPage = (requiredSpace: number) => {
+      if (yPosition + requiredSpace > pageHeight - 20) {
+        doc.addPage();
+        yPosition = 20;
+      }
+    };
+
+    // Title
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    yPosition = addText('Fraud Advisory Report', pageWidth / 2, yPosition);
+    yPosition += 10;
+
+    // Date
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    const currentDate = new Date().toLocaleDateString();
+    yPosition = addText(`Generated on: ${currentDate}`, pageWidth / 2, yPosition);
+    yPosition += 20;
+
+    // Summary Report Section
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    yPosition = addText('Summary Report', 20, yPosition);
+    yPosition += 10;
+
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    yPosition = addText('Projected Fraud Coverage: 91%', 20, yPosition);
+    yPosition = addText('Projected False Positive: 2.76%', 20, yPosition);
+    yPosition += 20;
+
+    // Recommended Rules Section
+    checkNewPage(100);
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    yPosition = addText('Recommended Rules', 20, yPosition);
+    yPosition += 10;
+
+    // Rules table headers
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    const headers = ['Rule', 'Fraud Coverage', 'False Positive', 'API Required', 'Ranking'];
+    const colWidths = [80, 25, 25, 25, 20];
+    let xPosition = 20;
+
+    headers.forEach((header, index) => {
+      doc.text(header, xPosition, yPosition);
+      xPosition += colWidths[index];
+    });
+    yPosition += 10;
+
+    // Rules data
+    doc.setFont('helvetica', 'normal');
+    recommendedRulesData.forEach((rule) => {
+      checkNewPage(20);
+      xPosition = 20;
+      
+      // Rule text (wrapped)
+      const ruleLines = doc.splitTextToSize(rule.rule, colWidths[0]);
+      doc.text(ruleLines, xPosition, yPosition);
+      const maxLines = ruleLines.length;
+      
+      // Other columns
+      xPosition += colWidths[0];
+      doc.text(rule.projectedFraudCoverage, xPosition, yPosition);
+      xPosition += colWidths[1];
+      doc.text(rule.projectedFalsePositive, xPosition, yPosition);
+      xPosition += colWidths[2];
+      doc.text(rule.exterbalApiRequired, xPosition, yPosition);
+      xPosition += colWidths[3];
+      doc.text(rule.tradeoffRanking, xPosition, yPosition);
+      
+      yPosition += Math.max(maxLines * 5, 10);
+    });
+
+    yPosition += 20;
+
+    // Recommended Integration Section
+    checkNewPage(50);
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    yPosition = addText('Recommended Integration', 20, yPosition);
+    yPosition += 10;
+
+    // Integration table headers
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    const integrationHeaders = ['Source', 'Required Data Field', 'Projected Improvement', 'Estimated Cost'];
+    const integrationColWidths = [40, 50, 40, 40];
+    xPosition = 20;
+
+    integrationHeaders.forEach((header, index) => {
+      doc.text(header, xPosition, yPosition);
+      xPosition += integrationColWidths[index];
+    });
+    yPosition += 10;
+
+    // Integration data
+    doc.setFont('helvetica', 'normal');
+    recommendedIntegrationData.forEach((integration) => {
+      checkNewPage(15);
+      xPosition = 20;
+      doc.text(integration.source, xPosition, yPosition);
+      xPosition += integrationColWidths[0];
+      doc.text(integration.requiredDataField, xPosition, yPosition);
+      xPosition += integrationColWidths[1];
+      doc.text(integration.projectedImprovement, xPosition, yPosition);
+      xPosition += integrationColWidths[2];
+      doc.text(integration.estimatedCost, xPosition, yPosition);
+      yPosition += 10;
+    });
+
+    // Footer
+    yPosition = pageHeight - 20;
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Generated by RevalueAI Fraud Advisory System', pageWidth / 2, yPosition, { align: 'center' });
+
+    // Download the PDF
+    doc.save('fraud-advisory-report.pdf');
+  };
+
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
-          Risk Analysis - Action Items
-        </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 4 }}>
         <Button
           variant="outlined"
           startIcon={<Download />}
+          onClick={handleDownloadPDF}
           sx={{
             borderColor: '#0073E5',
             color: '#0073E5',

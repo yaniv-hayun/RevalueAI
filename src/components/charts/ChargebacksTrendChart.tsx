@@ -5,8 +5,9 @@ const ChargebacksTrendChart: React.FC = () => {
   const months = ['Apr 2025', 'May 2025', 'Jun 2025', 'Jul 2025'];
   const chargebacks = [33, 28, 19, 7];
   const chargebacksProjection = [36, 33, 40, 49];
-  const amounts = [30000, 27000, 19000, 7000];
-  const amountsProjection = [32000, 28000, 38000, 48000];
+  // Scale down amounts to be visible on the same axis (divide by 1000)
+  const amounts = [30, 27, 19, 7];
+  const amountsProjection = [32, 28, 38, 48];
 
   return (
     <LineChart 
@@ -19,46 +20,51 @@ const ChargebacksTrendChart: React.FC = () => {
       ]}
       yAxis={[
         {
-          label: 'Incoming Chargebacks',
+          label: 'Count / Amount (K$)',
           min: 0,
           max: 50,
-        },
-        {
-          label: 'Amount ($)',
-          min: 0,
-          max: 50000,
         },
       ]}
       series={[
         {
+          id: 'chargebacks',
           data: chargebacks,
           label: 'Chargebacks',
           color: '#0073E5',
           curve: 'linear',
         },
         {
+          id: 'chargebacksProjection',
           data: chargebacksProjection,
-          label: 'Projected Chargebacks Amount',
+          label: 'Projected Chargebacks',
           color: '#4d9eff',
           curve: 'linear',
         },
         {
+          id: 'amounts',
           data: amounts,
-          label: 'Chargebacks Amount',
+          label: 'Chargebacks Amount (K$)',
           color: '#2E7D32',
           curve: 'linear',
         },
         {
+          id: 'amountsProjection',
           data: amountsProjection,
-          label: 'Projected Chargebacks',
+          label: 'Projected Chargebacks Amount (K$)',
           color: '#66BB6A',
           curve: 'linear',
         },
       ]}
-      // width={undefined}
       height={300}
-      // margin={{ left: 60, right: 60, top: 20, bottom: 60 }}
       grid={{ vertical: true, horizontal: true }}
+      sx={{
+        '& .MuiLineElement-series-chargebacksProjection': {
+          strokeDasharray: '5 5',
+        },
+        '& .MuiLineElement-series-amountsProjection': {
+          strokeDasharray: '5 5',
+        },
+      }}
     />
   );
 };

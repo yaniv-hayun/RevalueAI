@@ -130,6 +130,7 @@ const LandingPage: React.FC = () => {
                     fontSize: '1.1rem',
                     fontWeight: 600,
                     borderRadius: 2,
+                    
                     borderColor: 'white',
                     borderWidth: 2,
                     color: 'white',

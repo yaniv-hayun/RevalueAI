@@ -3,19 +3,28 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import theme from '../../theme';
 
 const FraudVsNonFraudChart: React.FC = () => {
-  const data = [
-    { category: 'Fraud', count: 110 },
-    { category: 'Non-Fraud', count: 220 },
-  ];
+  const dataValues = [110, 220];
+  const dataLabels = ['Fraud', 'Non-Fraud'];
 
   return (
     <BarChart
-      dataset={data}
+      series={[
+        {
+          data: dataValues,
+          id: 'fraudData',
+          label: 'Count',
+        },
+      ]}
       xAxis={[
         {
+          data: dataLabels,
           scaleType: 'band',
-          dataKey: 'category',
           label: 'Category',
+          colorMap: {
+            type: 'ordinal',
+            values: dataLabels,
+            colors: ['#FA003F', '#2E7D32'],
+          },
         },
       ]}
       yAxis={[
@@ -23,14 +32,6 @@ const FraudVsNonFraudChart: React.FC = () => {
           label: 'Count',
         },
       ]}
-      series={[
-        {
-          dataKey: 'count',
-          label: 'Count',
-        },
-      ]}
-      colors={['#0073E5']}
-    
       height={300}
       hideLegend={true}
     />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
@@ -10,8 +10,49 @@ import FraudVsNonFraudChart from './charts/FraudVsNonFraudChart';
 import FraudBreakdownChart from './charts/FraudBreakdownChart';
 import ChargebacksTrendChart from './charts/ChargebacksTrendChart';
 import ChargebacksByIssuerChart from './charts/ChargebacksByIssuerChart';
+import QuestionnaireDialog from './QuestionnaireDialog';
+import { useAuth } from '../contexts/AuthContext';
+
+interface QuestionnaireData {
+  industry: string;
+  annualRevenue: string;
+  fraudTeamSize: string;
+  fraudVendor: string;
+  mainRegion: string;
+  fraudChallenges: string[];
+  fraudPriorities: string[];
+}
 
 const Dashboard: React.FC = () => {
+  const { user } = useAuth();
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+
+  useEffect(() => {
+    // Check if user has completed the questionnaire
+    if (user) {
+      const hasCompletedQuestionnaire = localStorage.getItem('questionnaireCompleted');
+      if (!hasCompletedQuestionnaire) {
+        // Show questionnaire after a short delay to allow dashboard to render
+        const timer = setTimeout(() => {
+          setShowQuestionnaire(true);
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [user]);
+
+  const handleQuestionnaireSubmit = (data: QuestionnaireData) => {
+    // Store the questionnaire data
+    localStorage.setItem('questionnaireData', JSON.stringify(data));
+    localStorage.setItem('questionnaireCompleted', 'true');
+    console.log('Questionnaire data:', data);
+    // Here you could send the data to your backend
+  };
+
+  const handleQuestionnaireClose = () => {
+    setShowQuestionnaire(false);
+  };
+
   return (
     <Box sx={{
       minHeight: '100vh',
@@ -79,24 +120,6 @@ const Dashboard: React.FC = () => {
             minWidth: 200,
             maxWidth: 300,
             height: 120,
-            // background: (theme) => theme.palette.mode === 'dark' 
-            //   ? 'rgba(18, 18, 18, 0.95)' 
-            //   : 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'blur(10px)',
-            // border: (theme) => theme.palette.mode === 'dark' 
-            //   ? '1px solid rgba(255, 255, 255, 0.1)' 
-            //   : '1px solid rgba(255, 255, 255, 0.3)',
-            // borderRadius: 2,
-            // boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //   ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-            //   : '0 4px 20px rgba(0, 0, 0, 0.08)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   transform: 'translateY(-2px)',
-            //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //     ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-            //     : '0 8px 30px rgba(0, 0, 0, 0.12)',
-            // }
           }}
         >
           <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -169,24 +192,6 @@ const Dashboard: React.FC = () => {
             minWidth: 200,
             maxWidth: 300,
             height: 120,
-            // background: (theme) => theme.palette.mode === 'dark' 
-            //   ? 'rgba(18, 18, 18, 0.95)' 
-            //   : 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'blur(10px)',
-            // border: (theme) => theme.palette.mode === 'dark' 
-            //   ? '1px solid rgba(255, 255, 255, 0.1)' 
-            //   : '1px solid rgba(255, 255, 255, 0.3)',
-            // borderRadius: 2,
-            // boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //   ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-            //   : '0 4px 20px rgba(0, 0, 0, 0.08)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   transform: 'translateY(-2px)',
-            //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //     ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-            //     : '0 8px 30px rgba(0, 0, 0, 0.12)',
-            // }
           }}
         >
           <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -373,6 +378,13 @@ const Dashboard: React.FC = () => {
           </Box>
         </Box>
       </Box>
+
+      {/* Questionnaire Dialog */}
+      <QuestionnaireDialog
+        open={showQuestionnaire}
+        onClose={handleQuestionnaireClose}
+        onSubmit={handleQuestionnaireSubmit}
+      />
     </Box>
   );
 };
