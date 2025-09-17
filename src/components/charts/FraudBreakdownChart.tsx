@@ -1,7 +1,9 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { useTheme } from '@mui/material';
 
 const FraudBreakdownChart: React.FC = () => {
+  const theme = useTheme();
   const data = [
     { fraudType: 'True Fraud', count: 78 },
     { fraudType: 'Friendly Fraud', count: 32 },
@@ -26,7 +28,7 @@ const FraudBreakdownChart: React.FC = () => {
         {
           dataKey: 'count',
           label: 'Count',
-          color: '#0073E5',
+          color: theme.palette.primary.main,
         },
       ]}
       // width={undefined}

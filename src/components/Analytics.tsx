@@ -14,7 +14,8 @@ import {
   Button,
   Drawer,
   IconButton,
-  Divider
+  Divider,
+  useTheme
 } from '@mui/material';
 import { Download as DownloadIcon, FilterList as FilterIcon, Close as CloseIcon } from '@mui/icons-material';
 import jsPDF from 'jspdf';
@@ -25,12 +26,14 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const Analytics: React.FC = () => {
+  const theme = useTheme();
+  
   // Pie chart data for fraud breakdown
   const fraudBreakdownData = [
-    { id: 0, value: 45, label: 'Exposed Fraud', color: '#ff9800' },
-    { id: 1, value: 25, label: 'Shipping Mismatch', color: '#2196f3' },
-    { id: 2, value: 20, label: 'Topmail Fraud Ring', color: '#ffeb3b' },
-    { id: 3, value: 10, label: 'Account Take Over', color: '#4caf50' },
+    { id: 0, value: 45, label: 'Exposed Fraud', color: theme.palette.exposed.main },
+    { id: 1, value: 25, label: 'Shipping Mismatch', color: theme.palette.shipping.main },
+    { id: 2, value: 20, label: 'Topmail Fraud Ring', color: theme.palette.topmail.main },
+    { id: 3, value: 10, label: 'Account Take Over', color: theme.palette.account.main },
   ];
 
   // Data for risk assessment radar chart
@@ -79,8 +82,8 @@ const Analytics: React.FC = () => {
 
   // Data for quadrant chart
   const quadrantData = [
-    { id: 1, fraudRate: 3.0, falsePositiveRate: 1.5, label: 'Industry Benchmark', color: '#2196f3' },
-    { id: 2, fraudRate: 6.2, falsePositiveRate: 2.8, label: 'You Are Here', color: '#ff9800' },
+    { id: 1, fraudRate: 3.0, falsePositiveRate: 1.5, label: 'Industry Benchmark', color: theme.palette.info.main },
+    { id: 2, fraudRate: 6.2, falsePositiveRate: 2.8, label: 'You Are Here', color: theme.palette.warning.main },
   ];
 
   // Data for Email Domain by Class chart
@@ -278,20 +281,20 @@ const Analytics: React.FC = () => {
     };
 
     // Title
-    addText('Basic Risk Analysis Page (Post Upload)', 20, true, '#000000', 'center');
+    addText('Basic Risk Analysis Page (Post Upload)', 20, true, theme.palette.text.primary, 'center');
     yPosition += 15;
 
     // Date
-    addText(`Generated on: ${new Date().toLocaleDateString()}`, 10, false, '#666666', 'center');
+    addText(`Generated on: ${new Date().toLocaleDateString()}`, 10, false, theme.palette.text.secondary, 'center');
     yPosition += 20;
 
     // Overview Section
-    addText('Overview', 16, true, '#1976d2');
+    addText('Overview', 16, true, theme.palette.primary.main);
     addText('Using the 1,500-transaction sample, we modeled fraud occurrence (binary) as a function of four covariates: email domain, IP country, billing country, and average transaction amount.', 12);
     yPosition += 10;
 
     // Univariate association Section
-    addText('Univariate Association', 16, true, '#1976d2');
+    addText('Univariate Association', 16, true, theme.palette.primary.main);
     
     // First paragraph with better spacing
     doc.setFontSize(12);
@@ -323,12 +326,12 @@ const Analytics: React.FC = () => {
     yPosition += 10;
 
     // Multivariate modeling Section
-    addText('Multivariate Modeling', 16, true, '#1976d2');
+    addText('Multivariate Modeling', 16, true, theme.palette.primary.main);
     addText('In a logistic regression including all four variables, each covariate retains independent explanatory power (Wald tests, p < 0.01), confirming they are not collinear artifacts. Model fit improves materially versus a null model (likelihood-ratio test, p < 0.001).', 12);
     yPosition += 10;
 
     // Most informative relationship Section
-    addText('Most Informative Relationship (Interaction)', 16, true, '#1976d2');
+    addText('Most Informative Relationship (Interaction)', 16, true, theme.palette.primary.main);
     addText('The combination of IP country and billing country exhibits the strongest association with fraud:', 12);
     addText('• Adding the IP×Billing interaction term yields a significant improvement in fit (likelihood-ratio p < 0.001) and a meaningful lift in discrimination (e.g., AUC/PR metrics).', 12);
     addText('• Practically, country concordance vs. mismatch (or specific high-risk country pairs) provides the largest odds shift for fraud likelihood among the evaluated features.', 12);
@@ -375,7 +378,7 @@ const Analytics: React.FC = () => {
     addSectionDivider();
 
     // Analytics Charts Section
-    addText('Analytics Dashboard Charts', 16, true, '#1976d2');
+    addText('Analytics Dashboard Charts', 16, true, theme.palette.primary.main);
     yPosition += 10;
 
     // Email Domain by Class Chart Data
@@ -436,11 +439,11 @@ const Analytics: React.FC = () => {
     yPosition = 20;
 
     // Monitoring & Notifications Title
-    addText('Monitoring & Notifications', 20, true, '#000000', 'center');
+    addText('Monitoring & Notifications', 20, true, theme.palette.text.primary, 'center');
     yPosition += 20;
 
     // Anomaly Monitoring Section
-    addText('Weekly Anomaly Monitoring', 16, true, '#1976d2');
+    addText('Weekly Anomaly Monitoring', 16, true, theme.palette.primary.main);
     yPosition += 10;
 
     // Canadian Credit Cards & Proxy IPs Data
@@ -484,16 +487,16 @@ const Analytics: React.FC = () => {
     doc.rect(margin, yPosition - 5, contentWidth, 55, 'S');
     doc.setLineWidth(0.5); // Reset line width
     
-    addText('Recent Notifications', 14, true, '#1976d2');
+    addText('Recent Notifications', 14, true, theme.palette.primary.main);
     yPosition += 5;
 
-    addText('Fraud Risk Spike Detected (Canada & Proxy IPs)', 12, true, '#1976d2');
+    addText('Fraud Risk Spike Detected (Canada & Proxy IPs)', 12, true, theme.palette.primary.main);
     addText('• We detected a simultaneous spike in Canadian credit cards and proxy IP usage, which likely indicates a coordinated fraudulent attempt.', 11);
     addText('• Action: Further investigation is required.', 11);
     addText('• Optional: Would you like us to simulate and size a designated rule for this pattern (expected catch vs. false positives)?', 11);
     yPosition += 15;
 
-    addText('Singapore Billing Spike (Marketing Correlation)', 12, true, '#1976d2');
+    addText('Singapore Billing Spike (Marketing Correlation)', 12, true, theme.palette.primary.main);
     addText('• A spike in billing from Singapore was detected.', 11);
     addText('• This aligns with the marketing campaign you launched in Singapore during the same timeframe.', 11);
     addText('• Action: No further investigation required at this time; we\'ll continue to monitor for anomalies unrelated to the campaign.', 11);
@@ -583,21 +586,18 @@ const Analytics: React.FC = () => {
   return (
     <Box sx={{ p: 3 }}>
       {/* Page Title and Action Buttons */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
-          Analytics Dashboard
-        </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 3 }}>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <Button
             variant="outlined"
             startIcon={<FilterIcon />}
             onClick={toggleDrawer(true)}
             sx={{
-              borderColor: '#1976d2',
-              color: '#1976d2',
+              borderColor: theme.palette.primary.main,
+              color: theme.palette.primary.main,
               '&:hover': {
-                borderColor: '#1565c0',
-                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                borderColor: theme.palette.primary.dark,
+                backgroundColor: theme.palette.primary.light + '20',
               },
             }}
           >
@@ -833,8 +833,8 @@ const Analytics: React.FC = () => {
 
       {/* Active Filters Display */}
       {activeFiltersCount > 0 && (
-        <Paper elevation={1} sx={{ p: 2, mb: 3, backgroundColor: '#e3f2fd' }}>
-          <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: '#1976d2' }}>
+        <Paper elevation={1} sx={{ p: 2, mb: 3, backgroundColor: theme.palette.lightBlue.main }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1, color: theme.palette.primary.main }}>
             Active Filters:
           </Typography>
           <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
@@ -924,7 +924,7 @@ const Analytics: React.FC = () => {
                   series={[{ 
                     label: 'Risk Level', 
                     data: riskAssessmentData,
-                    color: '#4caf50'
+                    color: theme.palette.success.main
                   }]}
                   radar={{
                     max: 100,
@@ -951,17 +951,17 @@ const Analytics: React.FC = () => {
                     {
                       data: emailDomainData.noCB,
                       label: 'No CB',
-                      color: '#4caf50',
+                      color: theme.palette.success.main,
                     },
                     {
                       data: emailDomainData.nonFraudCB,
                       label: 'Non-Fraud CB',
-                      color: '#ffeb3b',
+                      color: theme.palette.topmail.main,
                     },
                     {
                       data: emailDomainData.fraudCB,
                       label: 'Fraud CB',
-                      color: '#f44336',
+                      color: theme.palette.error.main,
                     },
                   ]}
                   xAxis={[
@@ -997,17 +997,17 @@ const Analytics: React.FC = () => {
                     {
                       data: billingCountryData.noCB,
                       label: 'No CB',
-                      color: '#4caf50',
+                      color: theme.palette.success.main,
                     },
                     {
                       data: billingCountryData.nonFraudCB,
                       label: 'Non-Fraud CB',
-                      color: '#ffeb3b',
+                      color: theme.palette.topmail.main,
                     },
                     {
                       data: billingCountryData.fraudCB,
                       label: 'Fraud CB',
-                      color: '#f44336',
+                      color: theme.palette.error.main,
                     },
                   ]}
                   xAxis={[
@@ -1044,7 +1044,7 @@ const Analytics: React.FC = () => {
                       data: averageAmountData.amounts,
                     },
                   ]}
-                  colors={['#4caf50', '#ffeb3b', '#f44336']}
+                  colors={[theme.palette.success.main, theme.palette.topmail.main, theme.palette.error.main]}
                   xAxis={[
                     {
                       data: averageAmountData.classes,
@@ -1078,17 +1078,17 @@ const Analytics: React.FC = () => {
                     {
                       data: cardBrandData.noCB,
                       label: 'No CB',
-                      color: '#4caf50',
+                      color: theme.palette.success.main,
                     },
                     {
                       data: cardBrandData.nonFraudCB,
                       label: 'Non-Fraud CB',
-                      color: '#ffeb3b',
+                      color: theme.palette.topmail.main,
                     },
                     {
                       data: cardBrandData.fraudCB,
                       label: 'Fraud CB',
-                      color: '#f44336',
+                      color: theme.palette.error.main,
                     },
                   ]}
                   xAxis={[
@@ -1184,12 +1184,12 @@ const Analytics: React.FC = () => {
                     {
                       label: 'Industry Benchmark',
                       data: [{ x: 3.0, y: 1.5, id: 1 }],
-                      color: '#2196f3',
+                      color: theme.palette.info.main,
                     },
                     {
                       label: 'You Are Here',
                       data: [{ x: 6.2, y: 2.8, id: 2 }],
-                      color: '#ff9800',
+                      color: theme.palette.warning.main,
                     },
                   ]}
                   xAxis={[
@@ -1209,13 +1209,13 @@ const Analytics: React.FC = () => {
                   grid={{ vertical: true, horizontal: true }}
                   sx={{
                     '& .MuiChartsAxis-line': {
-                      stroke: '#666',
+                      stroke: theme.palette.text.secondary,
                     },
                     '& .MuiChartsAxis-tick': {
-                      stroke: '#666',
+                      stroke: theme.palette.text.secondary,
                     },
                     '& .MuiChartsAxis-tickLabel': {
-                      fill: '#666',
+                      fill: theme.palette.text.secondary,
                     },
                   }}
                 />
@@ -1239,7 +1239,7 @@ const Analytics: React.FC = () => {
                       left: '35%',
                       top: '20%',
                       fontSize: '0.7rem',
-                      color: '#2196f3',
+                      color: theme.palette.info.main,
                       fontWeight: 500,
                       backgroundColor: 'white',
                       padding: '2px 4px',
@@ -1256,7 +1256,7 @@ const Analytics: React.FC = () => {
                       left: '62%',
                       top: '35%',
                       fontSize: '0.7rem',
-                      color: '#ff9800',
+                      color: theme.palette.warning.main,
                       fontWeight: 500,
                       backgroundColor: 'white',
                       padding: '2px 4px',

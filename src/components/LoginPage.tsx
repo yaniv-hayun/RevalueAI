@@ -10,10 +10,13 @@ import {
   CardContent,
   Alert,
   IconButton,
+  useTheme,
 } from '@mui/material';
 import { Google as GoogleIcon, ArrowBack } from '@mui/icons-material';
+import RevalueAILogo from './RevalueAILogo';
 
 const LoginPage: React.FC = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [error, setError] = React.useState<string>('');
@@ -41,20 +44,20 @@ const LoginPage: React.FC = () => {
       flexGrow: 1, 
       minHeight: '100vh', 
       position: 'relative',
-      background: 'linear-gradient(135deg, #0073E5 0%, #4d9eff 100%)',
+        background: `#000`,
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden',
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'radial-gradient(circle at 20% 50%, rgba(0, 115, 229, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(77, 158, 255, 0.2) 0%, transparent 50%)',
-        pointerEvents: 'none',
-      }
+      // '&::before': {
+      //   content: '""',
+      //   position: 'absolute',
+      //   top: 0,
+      //   left: 0,
+      //   right: 0,
+      //   bottom: 0,
+      //   background: '',
+      //   pointerEvents: 'none',
+      // }
     }}>
       <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
         <Card 
@@ -69,6 +72,9 @@ const LoginPage: React.FC = () => {
         >
           <CardContent sx={{ p: 6 }}>
             <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Box sx={{ mb: 4 }}>
+                <RevalueAILogo size="large" showTagline={true} variant="vertical" />
+              </Box>
               <Typography 
                 variant="h3" 
                 component="h1" 
@@ -104,7 +110,7 @@ const LoginPage: React.FC = () => {
                   border: '1px solid rgba(244, 67, 54, 0.3)',
                   color: 'white',
                   '& .MuiAlert-icon': {
-                    color: '#ff6b6b',
+                    color: theme.palette.error.main,
                   }
                 }}
               >
@@ -115,23 +121,20 @@ const LoginPage: React.FC = () => {
             <Button
               fullWidth
               variant="contained"
-              size="large"
+              size="small"
               startIcon={<GoogleIcon />}
               onClick={handleGoogleLogin}
               sx={{
-                py: 2,
+                // py: 2,
                 fontSize: '1.1rem',
                 fontWeight: 600,
                 borderRadius: 3,
-                background: 'linear-gradient(45deg, #ff6b6b, #ee5a24)',
-                boxShadow: '0 8px 32px rgba(255, 107, 107, 0.3)',
+                background: theme.palette.fraud.main,
                 textTransform: 'none',
-                '&:hover': {
-                  background: 'linear-gradient(45deg, #ee5a24, #ff6b6b)',
-                  boxShadow: '0 12px 40px rgba(255, 107, 107, 0.4)',
-                  transform: 'translateY(-2px)',
-                  transition: 'all 0.3s ease',
-                },
+                // '&:hover': {
+                //   background: theme.palette.error.dark,
+                //   transform: 'translateY(-2px)',
+                // },
                 transition: 'all 0.3s ease',
               }}
             >

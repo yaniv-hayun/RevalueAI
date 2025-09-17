@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   Container,
+  useTheme,
 } from '@mui/material';
 import FraudVsNonFraudChart from './charts/FraudVsNonFraudChart';
 import FraudBreakdownChart from './charts/FraudBreakdownChart';
@@ -24,6 +25,7 @@ interface QuestionnaireData {
 }
 
 const Dashboard: React.FC = () => {
+  const theme = useTheme();
   const { user } = useAuth();
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
 
@@ -57,13 +59,13 @@ const Dashboard: React.FC = () => {
     <Box sx={{
       minHeight: '100vh',
       bgcolor: 'background.default',
-      p: 3
+      p: 2
     }}>
       {/* KPI Cards Row */}
       <Box sx={{ 
         display: 'flex', 
         gap: 2, 
-        mb: 4, 
+        mb: 2, 
         flexWrap: 'wrap',
         justifyContent: 'space-between'
       }}>
@@ -71,31 +73,13 @@ const Dashboard: React.FC = () => {
         <Card 
           elevation={0} 
           sx={{ 
-            flex: '1 1 200px',
+            flex: '1 1 300px',
             minWidth: 200,
             maxWidth: 300,
             height: 120,
-            // background: (theme) => theme.palette.mode === 'dark' 
-            //   ? 'rgba(18, 18, 18, 0.95)' 
-            //   : 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'blur(10px)',
-            // border: (theme) => theme.palette.mode === 'dark' 
-            //   ? '1px solid rgba(255, 255, 255, 0.1)' 
-            //   : '1px solid rgba(255, 255, 255, 0.3)',
-            // borderRadius: 2,
-            // boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //   ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-            //   : '0 4px 20px rgba(0, 0, 0, 0.08)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   transform: 'translateY(-2px)',
-            //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //     ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-            //     : '0 8px 30px rgba(0, 0, 0, 0.12)',
-            // }
           }}
         >
-          <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <CardContent sx={{ p: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="body2" color="text.secondary" gutterBottom sx={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Total Volume
             </Typography>
@@ -103,7 +87,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#0073E5',
+                color: theme.palette.primary.main,
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -116,13 +100,13 @@ const Dashboard: React.FC = () => {
         <Card 
           elevation={0} 
           sx={{ 
-            flex: '1 1 200px',
+            flex: '1 1 300px',
             minWidth: 200,
             maxWidth: 300,
             height: 120,
           }}
         >
-          <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <CardContent sx={{ p: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="body2" color="text.secondary" gutterBottom sx={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Declined Volume
             </Typography>
@@ -130,7 +114,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#0073E5',
+                color: theme.palette.primary.main,
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -147,27 +131,9 @@ const Dashboard: React.FC = () => {
             minWidth: 200,
             maxWidth: 300,
             height: 120,
-            // background: (theme) => theme.palette.mode === 'dark' 
-            //   ? 'rgba(18, 18, 18, 0.95)' 
-            //   : 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'blur(10px)',
-            // border: (theme) => theme.palette.mode === 'dark' 
-            //   ? '1px solid rgba(255, 255, 255, 0.1)' 
-            //   : '1px solid rgba(255, 255, 255, 0.3)',
-            // borderRadius: 2,
-            // boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //   ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
-            //   : '0 4px 20px rgba(0, 0, 0, 0.08)',
-            // transition: 'all 0.3s ease',
-            // '&:hover': {
-            //   transform: 'translateY(-2px)',
-            //   boxShadow: (theme) => theme.palette.mode === 'dark' 
-            //     ? '0 8px 30px rgba(0, 0, 0, 0.5)' 
-            //     : '0 8px 30px rgba(0, 0, 0, 0.12)',
-            // }
           }}
         >
-          <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <CardContent sx={{ p: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="body2" color="text.secondary" gutterBottom sx={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Total Chargebacks
             </Typography>
@@ -175,7 +141,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#FA003F',
+                color: theme.palette.fraud.main,
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -194,7 +160,7 @@ const Dashboard: React.FC = () => {
             height: 120,
           }}
         >
-          <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <CardContent sx={{ p: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="body2" color="text.secondary" gutterBottom sx={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Fraud Chargebacks
             </Typography>
@@ -202,7 +168,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#FA003F',
+                color: theme.palette.fraud.main,
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -214,14 +180,14 @@ const Dashboard: React.FC = () => {
         {/* Non Fraud Chargebacks */}
         <Card 
           elevation={0} 
-          sx={{ 
+          sx={{   
             flex: '1 1 200px',
             minWidth: 200,
             maxWidth: 300,
             height: 120,
           }}
         >
-          <CardContent sx={{ p: 3, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <CardContent sx={{ p: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="body2" color="text.secondary" gutterBottom sx={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: 0.5 }}>
               Non Fraud Chargebacks
             </Typography>
@@ -229,7 +195,7 @@ const Dashboard: React.FC = () => {
               variant="h5" 
               sx={{ 
                 fontWeight: 700,
-                color: '#0073E5',
+                color: theme.palette.primary.main,
                 fontSize: { xs: '1.25rem', sm: '1.5rem' }
               }}
             >
@@ -243,12 +209,12 @@ const Dashboard: React.FC = () => {
       <Box sx={{ 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: 3 
+        gap: 2 
       }}>
         {/* Top Row */}
         <Box sx={{ 
           display: 'flex', 
-          gap: 3, 
+          gap: 2, 
           flexWrap: 'wrap' 
         }}>
           <Box sx={{ 
@@ -310,7 +276,7 @@ const Dashboard: React.FC = () => {
         {/* Bottom Row */}
         <Box sx={{ 
           display: 'flex', 
-          gap: 3, 
+          gap: 2, 
           flexWrap: 'wrap' 
         }}>
           <Box sx={{ 

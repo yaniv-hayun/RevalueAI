@@ -1,8 +1,10 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { useTheme } from '@mui/material';
 import theme from '../../theme';
 
 const FraudVsNonFraudChart: React.FC = () => {
+  const theme = useTheme();
   const dataValues = [110, 220];
   const dataLabels = ['Fraud', 'Non-Fraud'];
 
@@ -23,7 +25,7 @@ const FraudVsNonFraudChart: React.FC = () => {
           colorMap: {
             type: 'ordinal',
             values: dataLabels,
-            colors: ['#FA003F', '#2E7D32'],
+            colors: [theme.palette.fraud.main, theme.palette.nonFraud.main],
           },
         },
       ]}

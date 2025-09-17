@@ -8,6 +8,19 @@ const colors = {
   warning: '#ff9800',
   info: '#2196f3',
   success: '#4caf50',
+  // Additional colors used in the app
+  fraud: '#FA003F', // Red for fraud
+  nonFraud: '#2E7D32', // Green for non-fraud
+  exposed: '#ff9800', // Orange for exposed fraud
+  shipping: '#2196f3', // Blue for shipping mismatch
+  topmail: '#ffeb3b', // Yellow for topmail fraud
+  account: '#4caf50', // Green for account take over
+  lightBlue: '#e3f2fd', // Light blue background
+  darkBlue: '#1e3a8a', // Dark blue for gradients
+  mediumBlue: '#3b82f6', // Medium blue
+  lightGray: '#f0f0f0', // Light gray
+  mediumGray: '#666666', // Medium gray
+  darkGray: '#333333', // Dark gray
 };
 
 // Light theme
@@ -39,12 +52,49 @@ export const lightTheme = createTheme({
       main: colors.success,
     },
     background: {
-      default: '#f0f0f0',
+      default: colors.lightGray,
       paper: '#ffffff',
     },
     text: {
       primary: '#212121',
       secondary: '#757575',
+    },
+    // Custom colors for the app
+    fraud: {
+      main: colors.fraud,
+    },
+    nonFraud: {
+      main: colors.nonFraud,
+    },
+    exposed: {
+      main: colors.exposed,
+    },
+    shipping: {
+      main: colors.shipping,
+    },
+    topmail: {
+      main: colors.topmail,
+    },
+    account: {
+      main: colors.account,
+    },
+    lightBlue: {
+      main: colors.lightBlue,
+    },
+    darkBlue: {
+      main: colors.darkBlue,
+    },
+    mediumBlue: {
+      main: colors.mediumBlue,
+    },
+    lightGray: {
+      main: colors.lightGray,
+    },
+    mediumGray: {
+      main: colors.mediumGray,
+    },
+    darkGray: {
+      main: colors.darkGray,
     },
   },
   typography: {
@@ -179,6 +229,43 @@ export const darkTheme = createTheme({
     text: {
       primary: '#ffffff',
       secondary: '#b0b0b0',
+    },
+    // Custom colors for the app
+    fraud: {
+      main: colors.fraud,
+    },
+    nonFraud: {
+      main: colors.nonFraud,
+    },
+    exposed: {
+      main: colors.exposed,
+    },
+    shipping: {
+      main: colors.shipping,
+    },
+    topmail: {
+      main: colors.topmail,
+    },
+    account: {
+      main: colors.account,
+    },
+    lightBlue: {
+      main: colors.lightBlue,
+    },
+    darkBlue: {
+      main: colors.darkBlue,
+    },
+    mediumBlue: {
+      main: colors.mediumBlue,
+    },
+    lightGray: {
+      main: colors.lightGray,
+    },
+    mediumGray: {
+      main: colors.mediumGray,
+    },
+    darkGray: {
+      main: colors.darkGray,
     },
   },
   typography: {

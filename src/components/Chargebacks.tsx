@@ -11,10 +11,13 @@ import {
   DialogContent,
   DialogActions,
   Divider,
+  Paper,
+  useTheme,
 } from '@mui/material';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 
 const Chargebacks: React.FC = () => {
+  const theme = useTheme();
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -117,7 +120,7 @@ const Chargebacks: React.FC = () => {
           variant="text"
           sx={{
             textTransform: 'none',
-            color: '#0073E5',
+            color: theme.palette.primary.main,
             fontWeight: 500,
             minWidth: 'auto',
             padding: 0,
@@ -187,7 +190,9 @@ const Chargebacks: React.FC = () => {
   return (
     <Box sx={{ p: 3, width: '100%', overflow: 'hidden' }}>
 
-
+    <Paper
+      sx={{ p: 3, width: '100%', overflow: 'hidden' }}
+    > 
       {/* Data Grid */}
       <Card sx={{ width: '100%' }}>
         <CardContent sx={{ p: 0, width: '100%' }}>
@@ -217,6 +222,7 @@ const Chargebacks: React.FC = () => {
           </Box>
         </CardContent>
       </Card>
+      </Paper>
 
       {/* Chargeback Details Dialog */}
       <Dialog

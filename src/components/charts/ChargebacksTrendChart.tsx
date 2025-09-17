@@ -1,7 +1,9 @@
 import React from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { useTheme } from '@mui/material';
 
 const ChargebacksTrendChart: React.FC = () => {
+  const theme = useTheme();
   const months = ['Apr 2025', 'May 2025', 'Jun 2025', 'Jul 2025'];
   const chargebacks = [33, 28, 19, 7];
   const chargebacksProjection = [36, 33, 40, 49];
@@ -30,28 +32,28 @@ const ChargebacksTrendChart: React.FC = () => {
           id: 'chargebacks',
           data: chargebacks,
           label: 'Chargebacks',
-          color: '#0073E5',
+          color: theme.palette.primary.main,
           curve: 'linear',
         },
         {
           id: 'chargebacksProjection',
           data: chargebacksProjection,
           label: 'Projected Chargebacks',
-          color: '#4d9eff',
+          color: theme.palette.primary.light,
           curve: 'linear',
         },
         {
           id: 'amounts',
           data: amounts,
           label: 'Chargebacks Amount (K$)',
-          color: '#2E7D32',
+          color: theme.palette.nonFraud.main,
           curve: 'linear',
         },
         {
           id: 'amountsProjection',
           data: amountsProjection,
           label: 'Projected Chargebacks Amount (K$)',
-          color: '#66BB6A',
+          color: theme.palette.success.light,
           curve: 'linear',
         },
       ]}

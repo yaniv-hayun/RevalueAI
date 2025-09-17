@@ -1,7 +1,9 @@
 import React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { useTheme } from '@mui/material';
 
 const ChargebacksByIssuerChart: React.FC = () => {
+  const theme = useTheme();
   const issuers = ['Visa', 'MasterCard', 'American Express'];
   const chargebacksData = [142, 98, 36];
 
@@ -31,7 +33,7 @@ const ChargebacksByIssuerChart: React.FC = () => {
         },
       ]}
       hideLegend={true}
-      colors={['#0073E5', '#e41e5b', '#9C27B0']}
+      colors={[theme.palette.primary.main, theme.palette.secondary.main, theme.palette.warning.main]}
       grid={{ vertical: true, horizontal: true }}
     />
   );
