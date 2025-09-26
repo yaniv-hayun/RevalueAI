@@ -43,7 +43,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useTheme as useCustomTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
-import RevalueAILogo from './RevalueAILogo';
 
 const drawerWidth = 240;
 
@@ -267,11 +266,24 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-            <RevalueAILogo size="small" showTagline={false} variant="horizontal" />
-            {/* <Typography variant="h6" noWrap component="div" sx={{ ml: 2 }}>
-              Fraud Advisory Dashboard
-            </Typography> */}
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'flex-start', 
+            flexGrow: 1,
+            justifyContent: 'flex-start',
+        
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <img 
+                src="/logo.png" 
+                alt="RevalueAI Logo" 
+                style={{ 
+                  height: '70px', 
+                  width: 'auto',
+                  objectFit: 'contain'
+                }}
+              />
+            </Box>
           </Box>
           <IconButton
             onClick={handleIntegrationClick}

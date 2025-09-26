@@ -13,7 +13,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { Google as GoogleIcon, ArrowBack } from '@mui/icons-material';
-import RevalueAILogo from './RevalueAILogo';
 
 const LoginPage: React.FC = () => {
   const theme = useTheme();
@@ -72,8 +71,40 @@ const LoginPage: React.FC = () => {
         >
           <CardContent sx={{ p: 6 }}>
             <Box sx={{ textAlign: 'center', mb: 6 }}>
-              <Box sx={{ mb: 4 }}>
-                <RevalueAILogo size="large" showTagline={true} variant="vertical" />
+              <Box sx={{ mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                <img 
+                  src="/logo.png" 
+                  alt="RevalueAI Logo" 
+                  style={{ 
+                    height: '80px', 
+                    width: 'auto',
+                    objectFit: 'contain'
+                  }}
+                />
+                <Typography
+                  variant="h3"
+                  sx={{
+                    fontWeight: 700,
+                    color: 'white',
+                    fontSize: '2.5rem',
+                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                    mb: 1
+                  }}
+                >
+                  RevalueAI
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: 2
+                  }}
+                >
+                  Fraud Risk Advisory
+                </Typography>
               </Box>
               <Typography 
                 variant="h3" 

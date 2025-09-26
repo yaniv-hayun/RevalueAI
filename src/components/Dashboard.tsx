@@ -27,7 +27,7 @@ interface QuestionnaireData {
 const Dashboard: React.FC = () => {
   const theme = useTheme();
   const { user } = useAuth();
-  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(true);
 
   useEffect(() => {
     // Check if user has completed the questionnaire

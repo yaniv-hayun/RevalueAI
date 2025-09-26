@@ -17,7 +17,6 @@ import {
 } from '@mui/icons-material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import RevalueAILogo from './RevalueAILogo';
 
 /*
 Advanced Fraud
@@ -66,11 +65,21 @@ const LandingPage: React.FC = () => {
           {/* Logo Header */}
           <Box sx={{ 
             position: 'absolute', 
-            top: 20, 
-            left: 20, 
+            top: 0, 
+            left: 0, 
             zIndex: 2 
           }}>
-            <RevalueAILogo size="large" showTagline={true} variant="horizontal" />
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <img 
+                src="/logo.png" 
+                alt="RevalueAI Logo" 
+                style={{ 
+                  height: '150px', 
+                  width: '150px',
+                  objectFit: 'contain'
+                }}
+              />
+            </Box>
           </Box>
           
           {/* Sign In Button */}
