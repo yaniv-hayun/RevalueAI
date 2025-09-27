@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  revalue-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gcr.io/revalue-ai-fraud-platform/revalue-ai:latest
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production

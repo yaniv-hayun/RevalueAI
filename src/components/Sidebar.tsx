@@ -268,22 +268,14 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           </IconButton>
           <Box sx={{ 
             display: 'flex', 
-            alignItems: 'flex-start', 
+            alignItems: 'center', 
             flexGrow: 1,
-            justifyContent: 'flex-start',
-        
+            justifyContent: 'center',
+            px: 2
           }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <img 
-                src="/logo.png" 
-                alt="RevalueAI Logo" 
-                style={{ 
-                  height: '70px', 
-                  width: 'auto',
-                  objectFit: 'contain'
-                }}
-              />
-            </Box>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: 'inherit' }}>
+              RevalueAI
+            </Typography>
           </Box>
           <IconButton
             onClick={handleIntegrationClick}
@@ -309,7 +301,26 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
- 
+        
+        {/* Logo in Sidebar */}
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          p: 2,
+          borderBottom: 1,
+          borderColor: 'divider'
+        }}>
+          <img 
+            src="/logo.png" 
+            alt="RevalueAI Logo" 
+            style={{ 
+              height: '50px', 
+              width: 'auto',
+              objectFit: 'contain'
+            }}
+          />
+        </Box>
          
         <Divider />
         <List>
