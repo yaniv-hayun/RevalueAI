@@ -14,7 +14,7 @@ import {
   Paper,
   useTheme,
 } from '@mui/material';
-import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const Chargebacks: React.FC = () => {
   const theme = useTheme();
@@ -208,16 +208,43 @@ const Chargebacks: React.FC = () => {
               pageSizeOptions={[5, 10, 25]}
               disableRowSelectionOnClick
               onRowClick={handleRowClick}
-              slots={{
-                toolbar: GridToolbar,
-              }}
+              // slots={{
+              //   toolbar: GridToolbar,
+              // }}
               slotProps={{
                 toolbar: {
                   showQuickFilter: true,
                   quickFilterProps: { debounceMs: 500 },
                 },
               }}
-              autoHeight
+              sx={{
+                backgroundColor: 'white',
+                border: 'none',
+                '& .MuiDataGrid-root': {
+                  border: 'none',
+                },
+                '& .MuiDataGrid-cell': {
+                  borderBottom: 'none',
+                  borderRight: 'none',
+                },
+                '& .MuiDataGrid-columnHeaders': {
+                  borderBottom: 'none',
+                  backgroundColor: 'white',
+                },
+                '& .MuiDataGrid-columnHeader': {
+                  backgroundColor: 'white',
+                  borderRight: 'none',
+                },
+                '& .MuiDataGrid-footerContainer': {
+                  borderTop: 'none',
+                },
+                '& .MuiDataGrid-row': {
+                  borderBottom: 'none',
+                },
+                '& .MuiDataGrid-row:hover': {
+                  backgroundColor: '#f5f5f5',
+                },
+              }}
             />
           </Box>
         </CardContent>
