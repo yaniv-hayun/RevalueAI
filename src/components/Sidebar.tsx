@@ -273,9 +273,20 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
             justifyContent: 'center',
             px: 2
           }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: 'inherit' }}>
-              RevalueAI
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <img 
+                src="/logo.png" 
+                alt="RevalueAI Logo" 
+                style={{ 
+                  height: '40px', 
+                  width: 'auto',
+                  objectFit: 'contain'
+                }}
+              />
+              <Typography variant="h6" sx={{ fontWeight: 600, color: 'inherit' }}>
+                RevalueAI
+              </Typography>
+            </Box>
           </Box>
           <IconButton
             onClick={handleIntegrationClick}
