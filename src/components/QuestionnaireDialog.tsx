@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
-  Stepper,
-  Step,
-  StepLabel,
   Box,
   Typography,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Checkbox,
-  FormGroup
+  TextField,
+  Paper,
+  Avatar,
+  IconButton,
+  Chip
 } from '@mui/material';
+import {
+  Send as SendIcon,
+  SmartToy as BotIcon,
+  Person as PersonIcon
+} from '@mui/icons-material';
 
 interface QuestionnaireData {
   industry: string;
@@ -27,6 +27,14 @@ interface QuestionnaireData {
   mainRegion: string;
   fraudChallenges: string[];
   fraudPriorities: string[];
+  additionalInfo: string;
+}
+
+interface ChatMessage {
+  id: string;
+  type: 'bot' | 'user';
+  content: string;
+  timestamp: Date;
 }
 
 interface QuestionnaireDialogProps {
@@ -35,18 +43,53 @@ interface QuestionnaireDialogProps {
   onSubmit: (data: QuestionnaireData) => void;
 }
 
-const steps = [
-  'Industry',
-  'Annual Revenue',
-  'Fraud Team Size',
-  'Fraud Prevention Vendor',
-  'Main Region',
-  'Fraud Challenges',
-  'Fraud Priorities'
+const questions = [
+  {
+    id: 'industry',
+    question: "What industry are you in? Please describe your business or select from common industries like Fashion & Apparel, Consumer Electronics, Food & Beverage, Health & Beauty, Home & Furniture, or Other.",
+    field: 'industry' as keyof QuestionnaireData
+  },
+  {
+    id: 'annualRevenue',
+    question: "What is your annual revenue? Please provide an estimate or range (e.g., $0-100K, $100K-1M, $1M-10M, or more than $10M).",
+    field: 'annualRevenue' as keyof QuestionnaireData
+  },
+  {
+    id: 'fraudTeamSize',
+    question: "What is the size of your internal fraud team? Please let us know if you have 1-2 people, 2-5 people, more than 5 people, or if you don't have an internal fraud team.",
+    field: 'fraudTeamSize' as keyof QuestionnaireData
+  },
+  {
+    id: 'fraudVendor',
+    question: "Do you currently use a fraud prevention vendor? Please let us know if you use one, don't use one, or are not sure.",
+    field: 'fraudVendor' as keyof QuestionnaireData
+  },
+  {
+    id: 'mainRegion',
+    question: "What is your main region of business? Please tell us if you operate primarily in North America, Europe, Asia-Pacific, Latin America, or other regions.",
+    field: 'mainRegion' as keyof QuestionnaireData
+  },
+  {
+    id: 'fraudChallenges',
+    question: "What are your main fraud management challenges? You can mention multiple challenges like effectively using data to manage fraud, gaps in fraud tool capabilities, identifying new types of fraud, lack of internal resources, or data availability issues.",
+    field: 'fraudChallenges' as keyof QuestionnaireData
+  },
+  {
+    id: 'fraudPriorities',
+    question: "What are your fraud management priorities? Please tell us about your main goals, such as reducing fraud and chargebacks, improving customer experience, or minimizing fraud-related operational costs.",
+    field: 'fraudPriorities' as keyof QuestionnaireData
+  },
+  {
+    id: 'additionalInfo',
+    question: "Is there anything else you'd like to share about your business, specific fraud challenges, or goals that we haven't covered? This will help us provide you with more personalized recommendations.",
+    field: 'additionalInfo' as keyof QuestionnaireData
+  }
 ];
 
 const QuestionnaireDialog: React.FC<QuestionnaireDialogProps> = ({ open, onClose, onSubmit }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [inputValue, setInputValue] = useState('');
   const [formData, setFormData] = useState<QuestionnaireData>({
     industry: '',
     annualRevenue: '',
@@ -54,19 +97,134 @@ const QuestionnaireDialog: React.FC<QuestionnaireDialogProps> = ({ open, onClose
     fraudVendor: '',
     mainRegion: '',
     fraudChallenges: [],
-    fraudPriorities: []
+    fraudPriorities: [],
+    additionalInfo: ''
   });
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    if (open && messages.length === 0) {
+      // Initialize with welcome message and first question
+      const welcomeMessage: ChatMessage = {
+        id: 'welcome',
+        type: 'bot',
+        content: "Hi! I'm here to help you get started with RevalueAI. Let me ask you a few questions to understand your business better.",
+        timestamp: new Date()
+      };
+      
+      const firstQuestion: ChatMessage = {
+        id: 'question-0',
+        type: 'bot',
+        content: questions[0].question,
+        timestamp: new Date()
+      };
+
+      setMessages([welcomeMessage, firstQuestion]);
+    }
+  }, [open]);
+
+  const handleSendMessage = () => {
+    if (!inputValue.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      type: 'user',
+      content: inputValue.trim(),
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+
+    // Store the answer
+    const currentQuestion = questions[currentQuestionIndex];
+    if (currentQuestion.field === 'fraudChallenges' || currentQuestion.field === 'fraudPriorities') {
+      // For multi-select fields, add to array
+      setFormData(prev => ({
+        ...prev,
+        [currentQuestion.field]: [...(prev[currentQuestion.field] as string[]), inputValue.trim()]
+      }));
+    } else {
+      // For single fields, replace the value
+      setFormData(prev => ({
+        ...prev,
+        [currentQuestion.field]: inputValue.trim()
+      }));
+    }
+
+    setInputValue('');
+
+    // Move to next question or complete
+    setTimeout(() => {
+      if (currentQuestionIndex < questions.length - 1) {
+        const nextQuestion: ChatMessage = {
+          id: `question-${currentQuestionIndex + 1}`,
+          type: 'bot',
+          content: questions[currentQuestionIndex + 1].question,
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, nextQuestion]);
+        setCurrentQuestionIndex(prev => prev + 1);
+      } else {
+        // All questions answered
+        const completionMessage: ChatMessage = {
+          id: 'completion',
+          type: 'bot',
+          content: "Perfect! Thank you for sharing all this valuable information about your business. This will help us customize RevalueAI to better serve your fraud prevention needs. You're all set to explore the platform!",
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, completionMessage]);
+      }
+    }, 1000);
+  };
+
+  const handleSkipAdditional = () => {
+    const skipMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      type: 'user',
+      content: "I'll skip this for now",
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, skipMessage]);
+
+    // Move to completion
+    setTimeout(() => {
+      const completionMessage: ChatMessage = {
+        id: 'completion',
+        type: 'bot',
+        content: "No problem! Thank you for providing the information you've shared. This will help us customize RevalueAI for your business needs. You're all set to explore the platform!",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, completionMessage]);
+      setCurrentQuestionIndex(questions.length); // Mark as complete
+    }, 1000);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const handleComplete = () => {
+    onSubmit(formData);
+    handleReset();
+    onClose();
   };
 
   const handleReset = () => {
-    setActiveStep(0);
+    setCurrentQuestionIndex(0);
+    setMessages([]);
+    setInputValue('');
     setFormData({
       industry: '',
       annualRevenue: '',
@@ -74,330 +232,204 @@ const QuestionnaireDialog: React.FC<QuestionnaireDialogProps> = ({ open, onClose
       fraudVendor: '',
       mainRegion: '',
       fraudChallenges: [],
-      fraudPriorities: []
+      fraudPriorities: [],
+      additionalInfo: ''
     });
   };
 
-  const handleSubmit = () => {
-    onSubmit(formData);
-    handleReset();
-    onClose();
-  };
+  const isComplete = currentQuestionIndex >= questions.length;
 
-  const handleSingleSelect = (field: keyof QuestionnaireData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleMultiSelect = (field: 'fraudChallenges' | 'fraudPriorities', value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: prev[field].includes(value)
-        ? prev[field].filter(item => item !== value)
-        : [...prev[field], value]
-    }));
-  };
-
-  const isStepValid = (step: number): boolean => {
-    switch (step) {
-      case 0:
-        return formData.industry !== '';
-      case 1:
-        return formData.annualRevenue !== '';
-      case 2:
-        return formData.fraudTeamSize !== '';
-      case 3:
-        return formData.fraudVendor !== '';
-      case 4:
-        return formData.mainRegion !== '';
-      case 5:
-        return formData.fraudChallenges.length > 0;
-      case 6:
-        return formData.fraudPriorities.length > 0;
-      default:
-        return false;
-    }
-  };
-
-  const renderStepContent = (step: number) => {
-    switch (step) {
-      case 0:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What is your industry?
-              </FormLabel>
-              <RadioGroup
-                value={formData.industry}
-                onChange={(e) => handleSingleSelect('industry', e.target.value)}
-              >
-                <FormControlLabel value="fashion" control={<Radio />} label="Fashion & Apparel" />
-                <FormControlLabel value="electronics" control={<Radio />} label="Consumer Electronics" />
-                <FormControlLabel value="food" control={<Radio />} label="Food & Beverage / Grocery" />
-                <FormControlLabel value="health" control={<Radio />} label="Health, Beauty & Drugstore" />
-                <FormControlLabel value="home" control={<Radio />} label="Home & Furniture" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 1:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What is your annual revenue?
-              </FormLabel>
-              <RadioGroup
-                value={formData.annualRevenue}
-                onChange={(e) => handleSingleSelect('annualRevenue', e.target.value)}
-              >
-                <FormControlLabel value="0-100k" control={<Radio />} label="$0 - $100K" />
-                <FormControlLabel value="100k-1m" control={<Radio />} label="$100K - $1M" />
-                <FormControlLabel value="1m-10m" control={<Radio />} label="$1M - $10M" />
-                <FormControlLabel value="10m+" control={<Radio />} label="More than $10M" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 2:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What is the size of your internal fraud team?
-              </FormLabel>
-              <RadioGroup
-                value={formData.fraudTeamSize}
-                onChange={(e) => handleSingleSelect('fraudTeamSize', e.target.value)}
-              >
-                <FormControlLabel value="1-2" control={<Radio />} label="1-2" />
-                <FormControlLabel value="2-5" control={<Radio />} label="2-5" />
-                <FormControlLabel value="5+" control={<Radio />} label="More than 5" />
-                <FormControlLabel value="none" control={<Radio />} label="There is no internal fraud team" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 3:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                Do you currently use a fraud prevention vendor?
-              </FormLabel>
-              <RadioGroup
-                value={formData.fraudVendor}
-                onChange={(e) => handleSingleSelect('fraudVendor', e.target.value)}
-              >
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-                <FormControlLabel value="not-sure" control={<Radio />} label="Not sure" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 4:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What is your main region of business?
-              </FormLabel>
-              <RadioGroup
-                value={formData.mainRegion}
-                onChange={(e) => handleSingleSelect('mainRegion', e.target.value)}
-              >
-                <FormControlLabel value="north-america" control={<Radio />} label="North America" />
-                <FormControlLabel value="europe" control={<Radio />} label="Europe" />
-                <FormControlLabel value="asia-pacific" control={<Radio />} label="Asia-Pacific" />
-                <FormControlLabel value="latin-america" control={<Radio />} label="Latin America" />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 5:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What is your main fraud management challenge? (you can pick more than one)
-              </FormLabel>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudChallenges.includes('data-management')}
-                      onChange={() => handleMultiSelect('fraudChallenges', 'data-management')}
-                    />
-                  }
-                  label="Effectively using data to manage fraud"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudChallenges.includes('tool-gaps')}
-                      onChange={() => handleMultiSelect('fraudChallenges', 'tool-gaps')}
-                    />
-                  }
-                  label="Gaps in fraud tool capabilities"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudChallenges.includes('new-fraud-types')}
-                      onChange={() => handleMultiSelect('fraudChallenges', 'new-fraud-types')}
-                    />
-                  }
-                  label="Identifying and responding to new types of fraud"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudChallenges.includes('lack-resources')}
-                      onChange={() => handleMultiSelect('fraudChallenges', 'lack-resources')}
-                    />
-                  }
-                  label="Lack of internal resources"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudChallenges.includes('data-access')}
-                      onChange={() => handleMultiSelect('fraudChallenges', 'data-access')}
-                    />
-                  }
-                  label="Data availability and access"
-                />
-              </FormGroup>
-            </FormControl>
-          </Box>
-        );
-
-      case 6:
-        return (
-          <Box sx={{ mt: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
-                What are your fraud management priorities?
-              </FormLabel>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudPriorities.includes('reduce-fraud')}
-                      onChange={() => handleMultiSelect('fraudPriorities', 'reduce-fraud')}
-                    />
-                  }
-                  label="Reducing fraud and chargebacks"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudPriorities.includes('customer-experience')}
-                      onChange={() => handleMultiSelect('fraudPriorities', 'customer-experience')}
-                    />
-                  }
-                  label="Improving the customer experience"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={formData.fraudPriorities.includes('minimize-costs')}
-                      onChange={() => handleMultiSelect('fraudPriorities', 'minimize-costs')}
-                    />
-                  }
-                  label="Minimizing fraud-related operational costs"
-                />
-              </FormGroup>
-            </FormControl>
-          </Box>
-        );
-
-      default:
-        return 'Unknown step';
-    }
+  const renderMessage = (message: ChatMessage) => {
+    const isBot = message.type === 'bot';
+    
+    return (
+      <Box
+        key={message.id}
+        sx={{
+          display: 'flex',
+          justifyContent: isBot ? 'flex-start' : 'flex-end',
+          mb: 2,
+          animation: 'fadeIn 0.3s ease-in'
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: 1,
+            maxWidth: '80%',
+            flexDirection: isBot ? 'row' : 'row-reverse'
+          }}
+        >
+          <Avatar
+            sx={{
+              bgcolor: isBot ? 'primary.main' : 'grey.500',
+              width: 32,
+              height: 32
+            }}
+          >
+            {isBot ? <BotIcon /> : <PersonIcon />}
+          </Avatar>
+          <Paper
+            sx={{
+              p: 2,
+              bgcolor: isBot ? 'grey.100' : 'primary.main',
+              color: isBot ? 'text.primary' : 'white',
+              borderRadius: 2,
+              boxShadow: 1
+            }}
+          >
+            <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
+              {message.content}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                display: 'block',
+                mt: 1,
+                opacity: 0.7,
+                fontSize: '0.75rem'
+              }}
+            >
+              {message.timestamp.toLocaleTimeString()}
+            </Typography>
+          </Paper>
+        </Box>
+      </Box>
+    );
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      PaperProps={{
-        sx: {
-          minHeight: '600px',
-          maxHeight: '80vh'
-        }
-      }}
-    >
-      <DialogTitle>
-        <Typography variant="h5" component="div" sx={{ fontWeight: 600, mb: 2 }}>
-          Welcome to RevalueAI
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-          Help us understand your business better by completing this quick questionnaire
-        </Typography>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+    <>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
+      <Dialog
+        open={open}
+        onClose={onClose}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            height: '80vh',
+            display: 'flex',
+            flexDirection: 'column'
+          }
+        }}
+      >
+      <DialogTitle sx={{ borderBottom: 1, borderColor: 'divider', pb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Avatar sx={{ bgcolor: 'primary.main' }}>
+            <BotIcon />
+          </Avatar>
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              RevalueAI Assistant
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Let's get to know your business better
+            </Typography>
+          </Box>
+        </Box>
+        {!isComplete && (
+          <Box sx={{ mt: 2 }}>
+            <Chip 
+              label={`Question ${currentQuestionIndex + 1} of ${questions.length}`}
+              size="small"
+              color="primary"
+              variant="outlined"
+            />
+          </Box>
+        )}
       </DialogTitle>
 
-      <DialogContent sx={{ px: 3, py: 2 }}>
-        {renderStepContent(activeStep)}
+      <DialogContent 
+        sx={{ 
+          flex: 1, 
+          overflow: 'auto', 
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Box sx={{ flex: 1, overflow: 'auto', mb: 2 }}>
+          {messages.map(renderMessage)}
+          <div ref={messagesEndRef} />
+        </Box>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, py: 2, justifyContent: 'space-between' }}>
-        <Button
-          onClick={handleBack}
-          disabled={activeStep === 0}
-          variant="outlined"
-        >
-          Back
-        </Button>
-        
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <Button onClick={onClose} variant="outlined">
-            Skip
-          </Button>
-          {activeStep === steps.length - 1 ? (
-            <Button
-              onClick={handleSubmit}
-              variant="contained"
-              disabled={!isStepValid(activeStep)}
+      {!isComplete && (
+        <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}>
+            <TextField
+              fullWidth
+              multiline
+              maxRows={4}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder={
+                currentQuestionIndex === questions.length - 1 
+                  ? "Share any additional information about your business or goals (optional)..."
+                  : "Type your answer here..."
+              }
+              variant="outlined"
+              size="small"
+              sx={{ flex: 1 }}
+            />
+            <IconButton
+              onClick={handleSendMessage}
+              disabled={!inputValue.trim()}
+              color="primary"
               sx={{ 
-                bgcolor: '#0073E5',
-                '&:hover': { bgcolor: '#005bb5' }
+                bgcolor: 'primary.main',
+                color: 'white',
+                '&:hover': { bgcolor: 'primary.dark' },
+                '&:disabled': { bgcolor: 'grey.300' }
               }}
             >
-              Complete
-            </Button>
-          ) : (
-            <Button
-              onClick={handleNext}
-              variant="contained"
-              disabled={!isStepValid(activeStep)}
-              sx={{ 
-                bgcolor: '#0073E5',
-                '&:hover': { bgcolor: '#005bb5' }
-              }}
-            >
-              Next
-            </Button>
+              <SendIcon />
+            </IconButton>
+          </Box>
+          {currentQuestionIndex === questions.length - 1 && (
+            <Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
+              <Button
+                onClick={handleSkipAdditional}
+                variant="text"
+                size="small"
+                sx={{ color: 'text.secondary' }}
+              >
+                Skip this step
+              </Button>
+            </Box>
           )}
         </Box>
+      )}
+
+      <DialogActions sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
+        <Button onClick={onClose} variant="outlined">
+          {isComplete ? 'Close' : 'Skip'}
+        </Button>
+        {isComplete && (
+          <Button
+            onClick={handleComplete}
+            variant="contained"
+            sx={{ 
+              bgcolor: '#0073E5',
+              '&:hover': { bgcolor: '#005bb5' }
+            }}
+          >
+            Complete Setup
+          </Button>
+        )}
       </DialogActions>
-    </Dialog>
+      </Dialog>
+    </>
   );
 };
 
