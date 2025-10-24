@@ -7,9 +7,9 @@ interface Auth0ProviderWrapperProps {
 
 const Auth0ProviderWrapper: React.FC<Auth0ProviderWrapperProps> = ({ children }) => {
   const cfg: any = (globalThis as any)?.window?.__APP_CONFIG__ || {}
-  const domain = cfg.auth0Domain || import.meta.env.VITE_AUTH0_DOMAIN || 'dev-wjawsi8t.auth0.com'
-  const clientId = cfg.auth0ClientId || import.meta.env.VITE_AUTH0_CLIENT_ID || 'u7CsMf8j1VJ3GBtUyibldGzq0TJdVELr'
-  const audience = cfg.auth0Audience || import.meta.env.VITE_AUTH0_AUDIENCE || 'https://dev-wjawsi8t.auth0.com/api/v2/'
+  const domain = cfg.auth0Domain || (import.meta as any).env?.VITE_AUTH0_DOMAIN || 'dev-wjawsi8t.auth0.com'
+  const clientId = cfg.auth0ClientId || (import.meta as any).env?.VITE_AUTH0_CLIENT_ID || 'u7CsMf8j1VJ3GBtUyibldGzq0TJdVELr'
+  const audience = cfg.auth0Audience || (import.meta as any).env?.VITE_AUTH0_AUDIENCE || 'https://dev-wjawsi8t.auth0.com/api/v2/'
   console.log('domain', domain)
   console.log('clientId', clientId)
   console.log('audience', audience)
