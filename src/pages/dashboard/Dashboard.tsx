@@ -7,12 +7,12 @@ import {
   Container,
   useTheme,
 } from '@mui/material';
-import FraudVsNonFraudChart from './charts/FraudVsNonFraudChart';
-import FraudBreakdownChart from './charts/FraudBreakdownChart';
-import ChargebacksTrendChart from './charts/ChargebacksTrendChart';
-import ChargebacksByIssuerChart from './charts/ChargebacksByIssuerChart';
-import QuestionnaireDialog from './QuestionnaireDialog';
-import { useAuth } from '../contexts/AuthContext';
+import FraudVsNonFraudChart from '../../components/charts/FraudVsNonFraudChart';
+import FraudBreakdownChart from '../../components/charts/FraudBreakdownChart';
+import ChargebacksTrendChart from '../../components/charts/ChargebacksTrendChart';
+import ChargebacksByIssuerChart from '../../components/charts/ChargebacksByIssuerChart';
+import QuestionnaireDialog from '../../components/QuestionnaireDialog';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface QuestionnaireData {
   industry: string;
@@ -26,7 +26,7 @@ interface QuestionnaireData {
 
 const Dashboard: React.FC = () => {
   const theme = useTheme();
-  const { user } = useAuth();
+  const { user } = useAuth0();
   const [showQuestionnaire, setShowQuestionnaire] = useState(true);
 
   useEffect(() => {

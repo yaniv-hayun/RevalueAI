@@ -41,7 +41,7 @@ import {
 import Popover from '@mui/material/Popover';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { useTheme as useCustomTheme } from '../contexts/ThemeContext';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -135,7 +135,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const theme = useTheme();
   const { mode, toggleTheme } = useCustomTheme();
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth0();
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
@@ -156,8 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   };
 
   const handleUserLogout = () => {
-    logout();
-    navigate('/login');
+    logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {

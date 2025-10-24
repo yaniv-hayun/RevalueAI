@@ -6,7 +6,7 @@
 set -e
 
 # Configuration
-PROJECT_ID="revalue-ai-fraud-platform"
+PROJECT_ID="rivalueai"
 SERVICE_NAME="revalue-ai"
 REGION="us-east1"
 IMAGE_NAME="gcr.io/$PROJECT_ID/$SERVICE_NAME"
