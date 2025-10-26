@@ -20,6 +20,9 @@ export interface User {
 function App() {
   const { isLoading, isAuthenticated, user: auth0User, logout } = useAuth0()
 
+  console.log('auth0User', auth0User);
+  console.log('isAuthenticated', isAuthenticated);
+  console.log('isLoading', isLoading);
   const handleLogout = () => {
     logout({ 
       logoutParams: { 
@@ -36,23 +39,23 @@ function App() {
   } : null
 
   // On first login, sync user to backend DB
-  React.useEffect(() => {
-    const syncUser = async () => {
-      if (isAuthenticated && auth0User?.email && auth0User?.sub) {
-        try {
-          await fetch(((import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:9000/api/v1') + '/users/sync', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: auth0User.email, name: auth0User.name, auth0_id: auth0User.sub })
-          })
-        } catch (e) {
-          // Non-blocking: log to console only
-          console.warn('Failed to sync user', e)
-        }
-      }
-    }
-    syncUser()
-  }, [isAuthenticated, auth0User?.email, auth0User?.sub])
+  // React.useEffect(() => {
+  //   // const syncUser = async () => {
+  //   //   if (isAuthenticated && auth0User?.email && auth0User?.sub) {
+  //   //     try {
+  //   //       await fetch(((import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:9000/api/v1') + '/users/sync', {
+  //   //         method: 'POST',
+  //   //         headers: { 'Content-Type': 'application/json' },
+  //   //         body: JSON.stringify({ email: auth0User.email, name: auth0User.name, auth0_id: auth0User.sub })
+  //   //       })
+  //   //     } catch (e) {
+  //   //       // Non-blocking: log to console only
+  //   //       console.warn('Failed to sync user', e)
+  //   //     }
+  //   //   }
+  //   // }
+  //   // syncUser()
+  // }, [isAuthenticated, auth0User?.email, auth0User?.sub])
 
   // Show loading while Auth0 is initializing
   if (isLoading) {
